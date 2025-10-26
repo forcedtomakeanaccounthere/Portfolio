@@ -2,9 +2,9 @@ import Image from 'next/image'
 
 export default function Contact() {
   return (
-    <section id="contact">
+    <section id="contact" className='mt-[-60px]'>
       <div className="contact container">
-        <div>
+        <div className='mb-[50px]'>
           <h1 className="section-title">Contact <span>info</span></h1>
         </div>
         <div className="contact-items">

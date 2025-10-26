@@ -11,6 +11,9 @@ export default function Header() {
       setIsScrolled(window.scrollY > 70)
     }
 
+    // Check initial scroll position on mount
+    handleScroll()
+
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -44,8 +47,8 @@ export default function Header() {
             <ul className={isNavOpen ? 'active' : ''}>
               <li><a href="#hero" onClick={closeNav} data-after="Home">Home</a></li>
               <li><a href="#services" onClick={closeNav} data-after="Services">Domains</a></li>
-              <li><a href="#skills" onClick={closeNav} data-after="Skills">Skills</a></li>
               <li><a href="#projects" onClick={closeNav} data-after="Projects">Projects</a></li>
+              <li><a href="#skills" onClick={closeNav} data-after="Skills">Skills</a></li>
               <li><a href="#about" onClick={closeNav} data-after="About">About</a></li>
               <li><a href="#contact" onClick={closeNav} data-after="Contact">Contact</a></li>
             </ul>

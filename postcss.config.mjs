@@ -1,6 +1,8 @@
 const config = {
   plugins: {
-    "@tailwindcss/postcss": {},
+    // Use the new PostCSS adapter package for Tailwind
+    '@tailwindcss/postcss': {},
+    autoprefixer: {},
   },
 };
 

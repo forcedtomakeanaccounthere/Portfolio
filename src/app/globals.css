@@ -1,6 +1,10 @@
 /* src/app/globals.css */
-/* Import Montserrat font */
+/* Import Montserrat font - must come before other rules (@import must precede other rules) */
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 * {
   padding: 0;
@@ -31,8 +35,8 @@ a {
 }
 
 .container-skills {
-  min-height: 100vh;
   width: 100%;
+  padding: 20px 0 40px 0; /* Reduced top and bottom padding for tighter spacing */
   align-items: center;
   justify-content: center;
 }
@@ -117,9 +121,11 @@ p {
 }
 
 .brand h1 {
-  font-size: 3rem;
+  font-size: 2.8rem;
   text-transform: uppercase;
   color: white;
+  padding-bottom: 6px;
+  padding-top: 3px;
 }
 
 .brand h1 span {
@@ -454,7 +460,7 @@ p {
 
 /* Skills Section Styling */
 #skills {
-  padding: 40px 20px;
+  padding: 20px 20px 20px 20px; /* Reduced all padding for tighter spacing */
   background-color: white;
   color: black;
 }
@@ -587,7 +593,7 @@ p {
   text-align: center;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 100px 20px;
+  padding: 50px 20px 100px 20px; /* Reduced top padding */
 }
 
 #about .col-left {
