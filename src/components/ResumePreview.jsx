@@ -11,12 +11,6 @@ function DownloadButton() {
     <a 
       href="/Resume_Abhishek_Anand.pdf" 
       className="cta"
-      style={{
-        color: isHovered ? 'white' : 'black',
-        transition: 'color 0.3s ease'
-      }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
     >
       Download Resume
     </a>

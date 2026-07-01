@@ -1,75 +1,50 @@
-import Image from 'next/image'
-
 export default function Skills() {
+  const skillCategories = [
+    {
+      category: 'Languages',
+      skills: 'C/C++, Python, Java, JavaScript, TypeScript, SQL',
+    },
+    {
+      category: 'Full-Stack & Frameworks',
+      skills: 'Next.js, React.js, Node.js, Express, Redux, GraphQL, Tailwind CSS, HTML, MongoDB',
+    },
+    {
+      category: 'AI/ML & Research',
+      skills: 'Machine Learning, Deep Learning, TensorFlow, NumPy, Pandas, Scikit-learn',
+    },
+    {
+      category: 'Cloud & DevOps',
+      skills: 'AWS, Google Cloud, Docker, Git, GitHub, Linux',
+    },
+  ]
+
   return (
-    <section id="skills">
-      <div className="container-skills">
-        <div className="service-top">
-          <h1 className="section-title">Ski<span>ll</span>s</h1>
+    <section id="skills" className="bg-white min-h-[600px] w-full py-20 px-4 scroll-mt-20">
+      <div className="max-w-[1000px] mx-auto">
+        <div className="text-center mb-16">
+          <h1 className="text-[4rem] font-light text-black uppercase tracking-[0.2rem]">
+            Ski<span className="text-[#DC143C]">ll</span>s
+          </h1>
         </div>
-        <div className="service-bottom">
-          <div className="skills">
-            <span className="skill-tag">
-              <Image className="skill-icons" src="https://img.icons8.com/clouds/100/python.png" alt="python" width={40} height={40} />
-              Python
-            </span>
-            <span className="skill-tag">
-              <Image className="skill-icons" src="https://img.icons8.com/color/48/tensorflow.png" alt="tensorflow" width={40} height={40} />
-              TensorFlow
-            </span>
-            <span className="skill-tag">
-              <Image className="skill-icons-imag" src="https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png" alt="Scikit-Learn" width={40} height={40} />
-              Scikit-Learn
-            </span>
-            <span className="skill-tag">
-              <Image className="skill-icons" src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-machine-learning-robotics-flaticons-lineal-color-flat-icons.png" alt="Machine Learning" width={40} height={40} />
-              Machine Learning
-            </span>
-            <span className="skill-tag">
-              <Image className="skill-icons" src="https://img.icons8.com/external-becris-lineal-color-becris/64/external-deep-learning-artificial-intelligence-becris-lineal-color-becris.png" alt="Deep Learning" width={40} height={40} />
-              Deep Learning
-            </span>
-            <span className="skill-tag">
-              <Image className="skill-icons-width" src="https://img.icons8.com/color/48/html-5--v1.png" alt="HTML" width={40} height={40} />
-              HTML
-            </span>
-            <span className="skill-tag">
-              <Image className="skill-icons-width" src="https://img.icons8.com/fluency/48/css3.png" alt="CSS" width={40} height={40} />
-              CSS
-            </span>
-            <span className="skill-tag">
-              <Image className="skill-icons-width" src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-natural-language-processing-big-data-flaticons-lineal-color-flat-icons.png" alt="NLP" width={40} height={40} />
-              NLP
-            </span>
-            <span className="skill-tag">
-              <Image className="skill-icons" src="https://img.icons8.com/external-smashingstocks-outline-color-smashing-stocks/66/external-data-analysis-seo-and-marketing-smashingstocks-outline-color-smashing-stocks.png" alt="Data Analysis" width={40} height={40} />
-              Data Analysis
-            </span>
-            <span className="skill-tag">
-              <Image className="skill-icons-width-sql" src="https://img.icons8.com/color/48/my-sql.png" alt="MySQL" width={40} height={40} />
-              MySQL
-            </span>
-            <span className="skill-tag">
-              <Image className="skill-icons" src="https://img.icons8.com/color/48/javascript--v1.png" alt="JavaScript" width={40} height={40} />
-              JavaScript
-            </span>
-            <span className="skill-tag">
-              <Image className="skill-icons" src="https://img.icons8.com/color/48/java-coffee-cup-logo--v1.png" alt="Java" width={40} height={40} />
-              Java
-            </span>
-            <span className="skill-tag">
-              <Image className="skill-icons" src="https://img.icons8.com/color/48/c-plus-plus-logo.png" alt="C++" width={40} height={40} />
-              C++
-            </span>
-            <span className="skill-tag">
-              <Image className="skill-icons-width" src="https://img.icons8.com/color/48/c-programming.png" alt="C" width={40} height={40} />
-              C
-            </span>
-            <span className="skill-tag">
-              <Image className="skill-icons" src="https://img.icons8.com/color/48/pandas.png" alt="Pandas" width={40} height={40} />
-              Pandas
-            </span>
-          </div>
+
+        <div className="border-t border-[#E5E5E5]">
+          {skillCategories.map((item, index) => (
+            <div
+              key={index}
+              className="group flex flex-col md:flex-row border-b border-[#E5E5E5] py-8 px-4 transition-all duration-300 hover:border-l-[3px] hover:border-l-[#DC143C] hover:bg-gray-50/50"
+            >
+              <div className="w-full md:w-1/3 mb-2 md:mb-0">
+                <h2 className="text-[1.4rem] font-bold uppercase tracking-[0.1rem] text-black group-hover:text-[#DC143C] transition-colors duration-300">
+                  {item.category}
+                </h2>
+              </div>
+              <div className="w-full md:w-2/3">
+                <p className="text-[1.8rem] font-light leading-[1.8] tracking-[0.05rem] text-black">
+                  {item.skills}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

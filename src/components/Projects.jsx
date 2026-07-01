@@ -1,59 +1,55 @@
-import Image from 'next/image'
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+import { projects } from '@/data/projects';
+import ProjectCard from './ProjectCard';
+import ProjectModal from './ProjectModal';
 
 export default function Projects() {
+  const [selectedProject, setSelectedProject] = useState(null);
+  const featuredProjects = projects.slice(0, 3);
+
   return (
-    <section id="projects">
-      <div className="projects container">
-        <div className="projects-header">
-          <h1 className="section-title">Recent <span>Projects</span></h1>
+    <section id="projects" className="py-32 bg-white">
+      <div className="max-w-[1200px] mx-auto px-6">
+        <div className="text-center mb-24">
+          <h2 className="text-[1.2rem] font-bold text-[#DC143C] uppercase tracking-[0.4em] mb-4">
+            Portfolio
+          </h2>
+          <h1 className="section-title">Featured <span>Projects</span></h1>
+          <div className="w-16 h-[2px] bg-[#DC143C] mx-auto mt-6" />
         </div>
-        <div className="all-projects">
-          <div className="project-item">
-            <div className="project-info">
-              <h1>Project 1 : Sarcasm Predictor</h1>
-              <h2>Uses NLP and DL</h2>
-              <p>This project can be used to <b>recognize the sentiment</b> of statement and tell the difference if the statement is sarcastic or not. The model is trained on <b>Newspaper Headlines</b> and popular <b>Tweets</b> recognizing sentiments using NLP concepts like embeddings, vectorization, etc.</p>
-              <h3 className="project-link"><a href="https://github.com/forcedtomakeanaccounthere/sarcasm_detector">Project Link</a></h3>
-            </div>
-            <div className="project-img">
-              <Image src="/img/sarcasm.jpg" alt="Sarcasm Predictor" fill style={{ objectFit: 'cover' }} />
-            </div>
-          </div>
-          <div className="project-item">
-            <div className="project-info">
-              <h1>Project 2 : Churn prevention Recommender System</h1>
-              <h2>Uses Content-Based filtering recommender system and ML</h2>
-              <p>Analyses the data of a telecom company and <b>recognises a pattern</b> which is followed majorly in the churn of customers. Accordingly it generates recommendations to give different kinds of <b>personalised offers to customers to reduce churn</b>.</p>
-              <h3 className="project-link"><a href="https://github.com/forcedtomakeanaccounthere/Churn-prevention-recommender-system">Project Link</a></h3>
-            </div>
-            <div className="project-img">
-              <Image src="/img/churn2.0.jpg" alt="Churn Prevention" fill style={{ objectFit: 'cover' }} />
-            </div>
-          </div>
-          <div className="project-item">
-            <div className="project-info">
-              <h1>Project 3 : Media & Marketing investment Recommender</h1>
-              <h2>Uses ML and DL</h2>
-              <p>Takes data of various Social Media platforms and decides how much <b>investment in advertisements</b> is actually converted into <b>profitable revenue</b> for the company by monitoring the number of clicks on Ads and actual buying of the product.</p>
-              <h3 className="project-link"><a href="https://github.com/forcedtomakeanaccounthere/media-and-marketing-investment">Project Link</a></h3>
-            </div>
-            <div className="project-img">
-              <Image src="/img/media2.0.jpg" alt="Media Investment" fill style={{ objectFit: 'cover' }} />
-            </div>
-          </div>
-          <div className="project-item">
-            <div className="project-info">
-              <h1>Project 4 : Crop Recommender System</h1>
-              <h2>Uses Recommender system and ML concepts</h2>
-              <p>Takes into account the <b>weather and soil conditions of a region</b> like temperature, rainfall, humidity, soil pH, nutrients in soil and the recommends the kind of crops that should be grown for <b>maximum yield and benifit</b> to farmer.</p>
-              <h3 className="project-link"><a href="https://github.com/forcedtomakeanaccounthere/crop_recommendation">Project Link</a></h3>
-            </div>
-            <div className="project-img">
-              <Image src="/img/img-1.png" alt="Crop Recommender" fill style={{ objectFit: 'cover' }} />
-            </div>
-          </div>
+
+        <div className="flex flex-col">
+          {featuredProjects.map((project, index) => (
+            <ProjectCard 
+              key={project.id} 
+              project={project} 
+              index={index}
+              onSeeMore={setSelectedProject}
+            />
+          ))}
+        </div>
+
+        <div className="mt-20 text-center">
+          <Link 
+            href="/project" 
+            className="inline-flex items-center gap-4 px-12 py-5 bg-[#29323C] text-white text-[1.6rem] font-bold rounded-2xl hover:bg-[#DC143C] transition-all duration-300 shadow-xl shadow-slate-200 group"
+          >
+            See All Projects
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover:translate-x-2">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </Link>
         </div>
       </div>
+
+      <ProjectModal 
+        project={selectedProject}
+        isOpen={!!selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
     </section>
-  )
+  );
 }

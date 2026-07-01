@@ -1,0 +1,4 @@
+- [ ] Update `src/app/globals.css` to fix header/footer skew by changing `.container` from full-height flex-centered to a normal width wrapper.
+- [ ] Add `#footer .footer` alignment overrides to keep footer content properly centered.
+- [ ] Add a mobile media query (max-width: 767px) to reduce `.hamburger` size (and bar sizing if needed).
+- [ ] Verify layout behavior for header/footer and hamburger in mobile and desktop.
