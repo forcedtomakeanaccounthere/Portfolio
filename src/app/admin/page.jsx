@@ -1,6 +1,23 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback } from 'react'
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent,
+} from '@dnd-kit/core'
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
 
 // ─────────────────────────────────────────────────────────────────────────────
 // MediaUploader – drag-and-drop + URL input, with live preview
@@ -228,7 +245,7 @@ export default function AdminPage() {
   // Data
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState('profile')
-  const [data, setData] = useState({ profile: null, about: null, skills: null, projects: null, experiences: null })
+  const [data, setData] = useState({ profile: null, about: null, skills: null, projects: null, experiences: null, education: null })
 
   // UI Status
   const [statusMessage, setStatusMessage] = useState({ type: '', text: '' })
@@ -237,6 +254,7 @@ export default function AdminPage() {
   // Modals
   const [expModal, setExpModal] = useState({ isOpen: false, item: null, isEdit: false })
   const [projectModal, setProjectModal] = useState({ isOpen: false, item: null, isEdit: false })
+  const [eduModal, setEduModal] = useState({ isOpen: false, item: null, isEdit: false })
 
   useEffect(() => {
     const savedToken = localStorage.getItem('portfolio_admin_token')
@@ -270,6 +288,27 @@ export default function AdminPage() {
       showStatus('error', 'Error: ' + err.message)
     } finally {
       setLoading(false)
+    }
+  }
+
+  // Drag and drop sensors
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  )
+
+  const handleDragEnd = (event, type) => {
+    const { active, over } = event
+    if (over && active.id !== over.id) {
+      setData(prev => ({
+        ...prev,
+        [type]: arrayMove(prev[type], prev[type].findIndex(item => item.id === active.id), prev[type].findIndex(item => item.id === over.id))
+      }))
+      // Auto-save the reordered list
+      const newData = arrayMove(data[type], data[type].findIndex(item => item.id === active.id), data[type].findIndex(item => item.id === over.id))
+      handleSave(type, newData)
     }
   }
 
@@ -362,7 +401,7 @@ export default function AdminPage() {
   // Experiences
   const openAddExp = () => setExpModal({
     isOpen: true, isEdit: false,
-    item: { id: Date.now(), company: '', role: '', duration: '', type: 'industry', tech: '', summary: '', detailed: '', image: '', url: '' }
+    item: { id: Date.now(), company: '', role: '', duration: '', type: 'industry', tech: '', summary: '', detailed: '', image: '', imageDesktop: '', imageMobile: '', url: '' }
   })
   const openEditExp = (exp) => setExpModal({
     isOpen: true, isEdit: true,
@@ -372,11 +411,20 @@ export default function AdminPage() {
   const handleExpSave = (e) => {
     e.preventDefault()
     const item = expModal.item
+    // Fallback priority: mobile version is always the fallback
+    const imageMobile = item.imageMobile || item.imageDesktop || item.image || ''
+    const imageDesktop = item.imageDesktop || item.image || ''
+    
     const parsed = {
       ...item,
       tech: item.tech.split(',').map(s => s.trim()).filter(Boolean),
       detailed: item.detailed.split('\n').map(s => s.trim()).filter(Boolean),
-      url: item.url || null
+      url: item.url || null,
+      // Always ensure mobile version is set as fallback
+      imageMobile: imageMobile,
+      imageDesktop: imageDesktop,
+      // Keep legacy image field for backwards compatibility (fallback to mobile)
+      image: imageMobile
     }
     const list = expModal.isEdit
       ? data.experiences.map(x => x.id === parsed.id ? parsed : x)
@@ -418,6 +466,29 @@ export default function AdminPage() {
   }
   const deleteProject = (id) => {
     if (confirm('Delete this project?')) handleSave('projects', data.projects.filter(x => x.id !== id))
+  }
+
+  // Education
+  const openAddEdu = () => setEduModal({
+    isOpen: true, isEdit: false,
+    item: { id: Date.now(), degree: '', college: '', duration: '', location: '', cgpa: '' }
+  })
+  const openEditEdu = (edu) => setEduModal({
+    isOpen: true, isEdit: true,
+    item: { ...edu }
+  })
+  const closeEduModal = () => setEduModal({ isOpen: false, item: null, isEdit: false })
+  const handleEduSave = (e) => {
+    e.preventDefault()
+    const item = eduModal.item
+    const list = eduModal.isEdit
+      ? data.education.map(x => x.id === item.id ? item : x)
+      : [...data.education, item]
+    handleSave('education', list)
+    closeEduModal()
+  }
+  const deleteEdu = (id) => {
+    if (confirm('Delete this education entry?')) handleSave('education', data.education.filter(x => x.id !== id))
   }
 
   // ── Shared input className generator ──────────────────────────────────────
@@ -606,7 +677,7 @@ export default function AdminPage() {
           </div>
 
           <nav className="flex-1 px-4 py-6 space-y-2">
-            {['profile', 'about', 'skills', 'experiences', 'projects'].map(tab => (
+            {['profile', 'about', 'skills', 'experiences', 'projects', 'education'].map(tab => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
@@ -616,7 +687,7 @@ export default function AdminPage() {
                     : 'admin-nav-inactive'
                 }`}
               >
-                {tab === 'experiences' ? 'Experience' : tab}
+                {tab === 'experiences' ? 'Experience' : tab === 'education' ? 'Education' : tab}
               </button>
             ))}
           </nav>
@@ -627,7 +698,7 @@ export default function AdminPage() {
           <div className="max-w-[800px]">
             <div className="flex items-center justify-between mb-10">
               <h2 className="text-[3.2rem] font-bold tracking-tight capitalize">
-                {activeTab === 'experiences' ? 'Experience' : activeTab === 'projects' ? 'Projects' : activeTab}
+                {activeTab === 'experiences' ? 'Experience' : activeTab === 'projects' ? 'Projects' : activeTab === 'education' ? 'Education' : activeTab}
               </h2>
               {saveLoading && (
                 <span className="flex items-center gap-2 text-[1.3rem] text-[#DC143C] font-semibold">
@@ -779,32 +850,45 @@ export default function AdminPage() {
                     + Add Experience
                   </button>
                 </div>
-                {data.experiences.map(exp => (
-                  <div key={exp.id} className="admin-list-row border rounded-2xl p-6 flex justify-between items-center transition-all duration-300">
-                    <div className="flex items-center gap-4">
-                      {exp.image && <img src={exp.image} alt={exp.company} className="w-14 h-14 rounded-xl object-cover shrink-0" />}
-                      <div>
-                        <h4 className="text-[1.6rem] font-bold">{exp.role}</h4>
-                        <p className="text-[1.3rem] admin-label mt-0.5">
-                          <span className="text-[#DC143C] font-semibold">{exp.company}</span> · {exp.duration}
-                        </p>
-                        <span className={`inline-block text-[1rem] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full mt-2 ${
-                          exp.type === 'industry'
-                            ? 'bg-[var(--tag-industry-bg)] text-[var(--tag-industry-text)]'
-                            : 'bg-[var(--tag-community-bg)] text-[var(--tag-community-text)]'
-                        }`}>{exp.type}</span>
-                      </div>
-                    </div>
-                    <div className="flex gap-3">
-                      <button onClick={() => openEditExp(exp)} className="p-2.5 admin-edit-btn rounded-xl transition-colors" title="Edit">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z" /></svg>
-                      </button>
-                      <button onClick={() => deleteExp(exp.id)} className="p-2.5 bg-red-50 text-red-500 hover:bg-red-100 rounded-xl transition-colors" title="Delete">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></svg>
-                      </button>
-                    </div>
-                  </div>
-                ))}
+                <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={(event) => handleDragEnd(event, 'experiences')}>
+                  <SortableContext items={data.experiences.map(exp => exp.id)} strategy={verticalListSortingStrategy}>
+                    {data.experiences.map(exp => (
+                      <SortableItem key={exp.id} id={exp.id}>
+                        {({ dragHandleProps }) => (
+                          <div className="admin-list-row border rounded-2xl p-6 flex justify-between items-center transition-all duration-300">
+                            <div className="flex items-center gap-4">
+                              <div {...dragHandleProps} className="cursor-move p-1">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-400">
+                                  <circle cx="9" cy="5" r="1" /><circle cx="9" cy="12" r="1" /><circle cx="9" cy="19" r="1" /><circle cx="15" cy="5" r="1" /><circle cx="15" cy="12" r="1" /><circle cx="15" cy="19" r="1" />
+                                </svg>
+                              </div>
+                              {(exp.imageDesktop || exp.imageMobile || exp.image) && <img src={exp.imageDesktop || exp.imageMobile || exp.image} alt={exp.company} className="w-14 h-14 rounded-xl object-cover shrink-0" />}
+                              <div>
+                                <h4 className="text-[1.6rem] font-bold">{exp.role}</h4>
+                                <p className="text-[1.3rem] admin-label mt-0.5">
+                                  <span className="text-[#DC143C] font-semibold">{exp.company}</span> · {exp.duration}
+                                </p>
+                                <span className={`inline-block text-[1rem] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full mt-2 ${
+                                  exp.type === 'industry'
+                                    ? 'bg-[var(--tag-industry-bg)] text-[var(--tag-industry-text)]'
+                                    : 'bg-[var(--tag-community-bg)] text-[var(--tag-community-text)]'
+                                }`}>{exp.type}</span>
+                              </div>
+                            </div>
+                            <div className="flex gap-3">
+                              <button onClick={() => openEditExp(exp)} className="p-2.5 admin-edit-btn rounded-xl transition-colors" title="Edit">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z" /></svg>
+                              </button>
+                              <button onClick={() => deleteExp(exp.id)} className="p-2.5 bg-red-50 text-red-500 hover:bg-red-100 rounded-xl transition-colors" title="Delete">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></svg>
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </SortableItem>
+                    ))}
+                  </SortableContext>
+                </DndContext>
               </div>
             )}
 
@@ -817,20 +901,63 @@ export default function AdminPage() {
                     + Add Project
                   </button>
                 </div>
-                {data.projects.map(proj => (
-                  <div key={proj.id} className="admin-list-row border rounded-2xl p-6 flex justify-between items-center transition-all duration-300">
-                    <div className="flex items-center gap-4">
-                      {proj.image && <img src={proj.image} alt={proj.name} className="w-20 h-14 rounded-xl object-cover shrink-0" />}
-                      <div>
-                        <h4 className="text-[1.6rem] font-bold">{proj.name}</h4>
-                        <p className="text-[1.3rem] admin-label mt-0.5 truncate max-w-[360px]">{proj.tagline || proj.description}</p>
-                      </div>
+                <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={(event) => handleDragEnd(event, 'projects')}>
+                  <SortableContext items={data.projects.map(proj => proj.id)} strategy={verticalListSortingStrategy}>
+                    {data.projects.map(proj => (
+                      <SortableItem key={proj.id} id={proj.id}>
+                        {({ dragHandleProps }) => (
+                          <div className="admin-list-row border rounded-2xl p-6 flex justify-between items-center transition-all duration-300">
+                            <div className="flex items-center gap-4">
+                              <div {...dragHandleProps} className="cursor-move p-1">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-400">
+                                  <circle cx="9" cy="5" r="1" /><circle cx="9" cy="12" r="1" /><circle cx="9" cy="19" r="1" /><circle cx="15" cy="5" r="1" /><circle cx="15" cy="12" r="1" /><circle cx="15" cy="19" r="1" />
+                                </svg>
+                              </div>
+                              {proj.image && <img src={proj.image} alt={proj.name} className="w-20 h-14 rounded-xl object-cover shrink-0" />}
+                              <div>
+                                <h4 className="text-[1.6rem] font-bold">{proj.name}</h4>
+                                <p className="text-[1.3rem] admin-label mt-0.5 truncate max-w-[360px]">{proj.tagline || proj.description}</p>
+                              </div>
+                            </div>
+                            <div className="flex gap-3">
+                              <button onClick={() => openEditProject(proj)} className="p-2.5 admin-edit-btn rounded-xl transition-colors" title="Edit">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z" /></svg>
+                              </button>
+                              <button onClick={() => deleteProject(proj.id)} className="p-2.5 bg-red-50 text-red-500 hover:bg-red-100 rounded-xl transition-colors" title="Delete">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></svg>
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </SortableItem>
+                    ))}
+                  </SortableContext>
+                </DndContext>
+              </div>
+            )}
+
+            {/* ── TAB: Education ── */}
+            {activeTab === 'education' && data.education && (
+              <div className="space-y-5">
+                <div className="flex justify-end">
+                  <button onClick={openAddEdu}
+                    className="bg-[#DC143C] hover:bg-[#b00f30] text-white font-bold px-5 py-3 rounded-xl text-[1.3rem] transition-colors">
+                    + Add Education
+                  </button>
+                </div>
+                {data.education.map(edu => (
+                  <div key={edu.id} className="admin-list-row border rounded-2xl p-6 flex justify-between items-center transition-all duration-300">
+                    <div>
+                      <h4 className="text-[1.6rem] font-bold">{edu.degree}</h4>
+                      <p className="text-[1.3rem] admin-label mt-0.5">{edu.college}</p>
+                      <p className="text-[1.2rem] admin-muted mt-1">{edu.duration} • {edu.location}</p>
+                      {edu.cgpa && <p className="text-[1.2rem] text-[#DC143C] mt-1 font-medium">CGPA: {edu.cgpa}</p>}
                     </div>
                     <div className="flex gap-3">
-                      <button onClick={() => openEditProject(proj)} className="p-2.5 admin-edit-btn rounded-xl transition-colors" title="Edit">
+                      <button onClick={() => openEditEdu(edu)} className="p-2.5 admin-edit-btn rounded-xl transition-colors" title="Edit">
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z" /></svg>
                       </button>
-                      <button onClick={() => deleteProject(proj.id)} className="p-2.5 bg-red-50 text-red-500 hover:bg-red-100 rounded-xl transition-colors" title="Delete">
+                      <button onClick={() => deleteEdu(edu.id)} className="p-2.5 bg-red-50 text-red-500 hover:bg-red-100 rounded-xl transition-colors" title="Delete">
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></svg>
                       </button>
                     </div>
@@ -885,12 +1012,22 @@ export default function AdminPage() {
                 </div>
                 <div className="md:col-span-2">
                   <MediaUploader
-                    label="Company / Cover Image"
-                    value={expModal.item.image}
-                    onChange={v => setExpModal(p => ({ ...p, item: { ...p.item, image: v } }))}
+                    label="Desktop Image"
+                    value={expModal.item.imageDesktop}
+                    onChange={v => setExpModal(p => ({ ...p, item: { ...p.item, imageDesktop: v } }))}
                     accept="image/*"
                     token={token}
-                    hint="Company photo or logo"
+                    hint="Desktop version (1920x1080 recommended)"
+                  />
+                </div>
+                <div className="md:col-span-2">
+                  <MediaUploader
+                    label="Mobile Image"
+                    value={expModal.item.imageMobile}
+                    onChange={v => setExpModal(p => ({ ...p, item: { ...p.item, imageMobile: v } }))}
+                    accept="image/*"
+                    token={token}
+                    hint="Mobile version (1080x1920 recommended). Falls back to desktop if not provided."
                   />
                 </div>
                 <div className="md:col-span-2">
@@ -972,12 +1109,66 @@ export default function AdminPage() {
             </form>
           </ModalWrapper>
         )}
+
+        {/* ── Education Modal ── */}
+        {eduModal.isOpen && (
+          <ModalWrapper onClose={closeEduModal} title={eduModal.isEdit ? 'Edit Education' : 'Add Education'} isDark={isDark}>
+            <form onSubmit={handleEduSave} className="space-y-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <Field label="Degree">
+                  <input type="text" required value={eduModal.item.degree}
+                    onChange={e => setEduModal(p => ({ ...p, item: { ...p.item, degree: e.target.value } }))} className={inpSm} />
+                </Field>
+                <Field label="College/University">
+                  <input type="text" required value={eduModal.item.college}
+                    onChange={e => setEduModal(p => ({ ...p, item: { ...p.item, college: e.target.value } }))} className={inpSm} />
+                </Field>
+                <Field label="Duration">
+                  <input type="text" required placeholder="Aug 2023 - Aug 2027" value={eduModal.item.duration}
+                    onChange={e => setEduModal(p => ({ ...p, item: { ...p.item, duration: e.target.value } }))} className={inpSm} />
+                </Field>
+                <Field label="Location">
+                  <input type="text" required placeholder="Sri City, Andhra Pradesh, India" value={eduModal.item.location}
+                    onChange={e => setEduModal(p => ({ ...p, item: { ...p.item, location: e.target.value } }))} className={inpSm} />
+                </Field>
+                <div className="md:col-span-2">
+                  <Field label="CGPA/Grade (Optional)">
+                    <input type="text" placeholder="7.9" value={eduModal.item.cgpa || ''}
+                      onChange={e => setEduModal(p => ({ ...p, item: { ...p.item, cgpa: e.target.value } }))} className={inpSm} />
+                  </Field>
+                </div>
+              </div>
+              <ModalFooter onCancel={closeEduModal} label={eduModal.isEdit ? 'Save Changes' : 'Add Education'} />
+            </form>
+          </ModalWrapper>
+        )}
       </main>
     </>
   )
 }
 
 // ── Small helpers ─────────────────────────────────────────────────────────────
+function SortableItem({ id, children, dragHandle }) {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+  } = useSortable({ id })
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  }
+
+  return (
+    <div ref={setNodeRef} style={style}>
+      {children({ dragHandleProps: { ...attributes, ...listeners } })}
+    </div>
+  )
+}
+
 function Field({ label, children }) {
   return (
     <div className="space-y-1">

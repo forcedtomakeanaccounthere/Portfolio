@@ -21,7 +21,9 @@
       "Streamlined end-to-end fulfillment logistics, including trip logs and pincode-based routing.",
       "Implemented real-time live order updates and comprehensive audit trails via Socket.IO."
     ],
-    "image": "https://images.pexels.com/photos/4451871/pexels-photo-4451871.jpeg",
+    "image": "/uploads/1783281500607_Screenshot_2026-07-06_011333.png",
+    "imageDesktop": "/uploads/1783281443199_Screenshot_2026-07-06_011333.png",
+    "imageMobile": "/uploads/1783281500607_Screenshot_2026-07-06_011333.png",
     "url": "https://muktifresh.in/"
   },
   {
@@ -45,7 +47,9 @@
       "Optimized backend API interactions, significantly reducing latency and boosting Lighthouse SEO scores.",
       "Implemented secure payment webhooks and transaction auditing using Razorpay."
     ],
-    "image": "https://images.pexels.com/photos/6958710/pexels-photo-6958710.jpeg",
+    "image": "/uploads/1783281791106_Screenshot_2026-07-06_011523.png",
+    "imageDesktop": "/uploads/1783281746528_Screenshot_2026-07-06_011643.png",
+    "imageMobile": "/uploads/1783281791106_Screenshot_2026-07-06_011523.png",
     "url": "https://www.bhawbhaw.com/"
   },
   {
@@ -70,6 +74,8 @@
       "Represented GDG at inter-college tech events, driving community growth and technical excellence."
     ],
     "image": "/uploads/1783259768381_WhatsApp_Image_2026-06-15_at_7.10.13_PM.jpeg",
+    "imageDesktop": "/uploads/1783265772999_ChatGPT_Image_Jul_5__2026__09_04_53_PM.png",
+    "imageMobile": "/uploads/1783259768381_WhatsApp_Image_2026-06-15_at_7.10.13_PM.jpeg",
     "url": null
   },
   {
@@ -92,7 +98,9 @@
       "Provided research assistance and co-authored technical documentation on applied machine learning methodologies.",
       "Acted as a primary point of contact for AI/ML queries within the community, fostering a culture of knowledge sharing and collaborative learning."
     ],
-    "image": "https://images.pexels.com/photos/6958710/pexels-photo-6958710.jpeg",
+    "image": "/uploads/1783275422118_gdg-core-team.jpeg",
+    "imageDesktop": "/uploads/1783280381591_gdg-core-team.jpeg",
+    "imageMobile": "/uploads/1783275422118_gdg-core-team.jpeg",
     "url": null
   },
   {
@@ -116,7 +124,9 @@
       "Won multiple technical hackathons representing IOTA at inter-college competitions, showcasing applied AI solutions under time constraints.",
       "Collaborated with cross-functional teams to ship research prototypes with real-world applicability and societal impact."
     ],
-    "image": "https://images.pexels.com/photos/4451871/pexels-photo-4451871.jpeg",
+    "image": "/uploads/1783275552554_DSC_0207.JPG",
+    "imageDesktop": "/uploads/1783275544376_DSC_0207.JPG",
+    "imageMobile": "/uploads/1783275552554_DSC_0207.JPG",
     "url": null
   },
   {
@@ -140,7 +150,9 @@
       "Contributed to internal workshops on CNN and RNN architectures, simplifying complex concepts for newcomers to the field.",
       "Collaborated on research projects exploring transfer learning and model optimization strategies for resource-constrained environments."
     ],
-    "image": "https://images.pexels.com/photos/6958710/pexels-photo-6958710.jpeg",
+    "image": "/uploads/1783275460257_ChatGPT_Image_Jul_5__2026__11_47_10_PM.png",
+    "imageDesktop": "/uploads/1783275454538_ChatGPT_Image_Jul_5__2026__11_47_10_PM.png",
+    "imageMobile": "/uploads/1783275460257_ChatGPT_Image_Jul_5__2026__11_47_10_PM.png",
     "url": null
   }
 ]

@@ -27,17 +27,17 @@ export default function ProjectCard({ project, onSeeMore, index }) {
           alt={project.name}
           fill
           onLoad={() => setImgLoaded(true)}
-          className={`object-cover transition-[transform,opacity] duration-[1500ms] ease-out group-hover:scale-110 ${
+          className={`object-cover transition-[transform,opacity] duration-[1500ms] ease-out group-hover:scale-105 ${
             imgLoaded ? 'opacity-100' : 'opacity-0'
           }`}
           style={{ backfaceVisibility: 'hidden', transform: 'translateZ(0)' }}
         />
-        <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition-colors duration-700" />
+        <div className="absolute inset-0 bg-slate-400/10 group-hover:bg-slate-900/0 transition-colors duration-700" />
         
         {/* Floating Accent Element */}
-        <div className={`absolute top-10 ${isEven ? 'left-10' : 'right-10'} w-24 h-24 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 hidden md:block transition-all duration-700 group-hover:translate-y-[-10px] group-hover:rotate-12 flex items-center justify-center text-white/50 text-[1.4rem] font-black`}>
+        {/* <div className={`absolute top-10 ${isEven ? 'left-10' : 'right-10'} w-24 h-24 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 hidden md:block transition-all duration-700 group-hover:translate-y-[-10px] group-hover:rotate-12 flex items-center justify-center text-white/50 text-[1.4rem] font-black`}>
           {String(index + 1).padStart(2, '0')}
-        </div>
+        </div> */}
       </div>
 
       {/* High-Concept Content Panel - Deep Overlap */}

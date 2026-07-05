@@ -99,7 +99,22 @@ export default function ExperiencePage() {
               <div className="overflow-y-auto custom-scrollbar flex-1">
                 {/* Hero Header */}
                 <div className="relative h-[280px] w-full">
-                  <Image src={selectedExp.image} alt={selectedExp.company} fill className="object-cover" />
+                  <div className="block md:hidden">
+                    <Image
+                      src={selectedExp.imageMobile ?? selectedExp.image}
+                      alt={selectedExp.company}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="hidden md:block">
+                    <Image
+                      src={selectedExp.imageDesktop ?? selectedExp.image}
+                      alt={selectedExp.company}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-white via-white/5 to-transparent" />
                   <button
                     onClick={() => setSelectedExp(null)}
@@ -307,7 +322,7 @@ function ExpCard({ exp, onOpen, isLeft }) {
     >
       {/* Photo on card – positioned strategically towards the timeline hub */}
       <div className={`shrink-0 w-28 h-28 rounded-2xl overflow-hidden border border-slate-100 shadow-sm order-first ${isLeft ? '' : 'sm:order-last'}`}>
-        <Image src={exp.image} alt={exp.company} width={112} height={112} className="object-cover w-full h-full grayscale-[0.2] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" />
+        <Image src={exp.imageMobile ?? exp.imageDesktop ?? exp.image} alt={exp.company} width={112} height={112} className="object-cover w-full h-full grayscale-[0.2] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" />
       </div>
 
       <div className="flex-1">

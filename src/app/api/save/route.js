@@ -90,13 +90,14 @@ export async function POST(req) {
     }
 
     const { type, data } = await req.json()
-    const validTypes = ['profile', 'about', 'skills', 'projects', 'experiences']
+    const validTypes = ['profile', 'about', 'skills', 'projects', 'experiences', 'education']
 
     if (!validTypes.includes(type)) {
       return NextResponse.json({ success: false, error: 'Invalid data type' }, { status: 400 })
     }
 
     const jsonContent = JSON.stringify(data, null, 2)
+    const fileName = type
     let localSaved = false
     let githubSaved = false
 
@@ -104,7 +105,7 @@ export async function POST(req) {
     const isDev = process.env.NODE_ENV === 'development'
     if (isDev || !process.env.GITHUB_TOKEN) {
       try {
-        const filePath = path.join(process.cwd(), 'src', 'data', `${type}.json`)
+        const filePath = path.join(process.cwd(), 'src', 'data', `${fileName}.json`)
         fs.writeFileSync(filePath, jsonContent, 'utf-8')
         localSaved = true
       } catch (err) {
@@ -118,7 +119,7 @@ export async function POST(req) {
 
     // B. GitHub commit (if credentials are set)
     if (process.env.GITHUB_TOKEN && process.env.GITHUB_REPO) {
-      await commitToGithub(type, jsonContent)
+      await commitToGithub(fileName, jsonContent)
       githubSaved = true
     }
 
@@ -141,16 +142,18 @@ export async function GET() {
     const skillsPath = path.join(process.cwd(), 'src', 'data', 'skills.json')
     const projectsPath = path.join(process.cwd(), 'src', 'data', 'projects.json')
     const experiencesPath = path.join(process.cwd(), 'src', 'data', 'experiences.json')
+    const educationPath = path.join(process.cwd(), 'src', 'data', 'education.json')
 
     const profile = JSON.parse(fs.readFileSync(profilePath, 'utf-8'))
     const about = JSON.parse(fs.readFileSync(aboutPath, 'utf-8'))
     const skills = JSON.parse(fs.readFileSync(skillsPath, 'utf-8'))
     const projects = JSON.parse(fs.readFileSync(projectsPath, 'utf-8'))
     const experiences = JSON.parse(fs.readFileSync(experiencesPath, 'utf-8'))
+    const education = JSON.parse(fs.readFileSync(educationPath, 'utf-8'))
 
     return NextResponse.json({
       success: true,
-      data: { profile, about, skills, projects, experiences }
+      data: { profile, about, skills, projects, experiences, education }
     })
   } catch (err) {
     return NextResponse.json({ success: false, error: err.message }, { status: 500 })

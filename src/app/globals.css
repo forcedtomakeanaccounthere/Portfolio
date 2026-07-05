@@ -345,8 +345,6 @@ p {
 .hamburger {
   height: 32px;
   width: 32px;
-  border: 2px solid white;
-  border-radius: 50%;
   position: relative;
   display: flex;
   align-items: center;

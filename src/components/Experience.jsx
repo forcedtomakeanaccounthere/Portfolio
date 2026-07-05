@@ -8,20 +8,34 @@ import { experiences } from '@/data/experiences'
 
 const featuredExperiences = experiences.slice(0, 2)
 
-function ExperienceImage({ src, alt }) {
+function ExperienceImage({ srcDesktop, srcMobile, alt }) {
   const [loaded, setLoaded] = useState(false)
 
   return (
     <div className="w-full md:w-1/2 group relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl bg-slate-200 dark:bg-slate-800">
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        onLoad={() => setLoaded(true)}
-        className={`object-cover scale-105 group-hover:scale-110 transition-[transform,opacity] duration-700 ease-out ${
-          loaded ? 'opacity-100' : 'opacity-0'
-        }`}
-      />
+      <div className="block md:hidden">
+        <Image
+          src={srcMobile ?? srcDesktop}
+          alt={alt}
+          fill
+          onLoad={() => setLoaded(true)}
+          className={`object-cover scale-105 group-hover:scale-110 transition-[transform,opacity] duration-700 ease-out ${
+            loaded ? 'opacity-100' : 'opacity-0'
+          }`}
+        />
+      </div>
+
+      <div className="hidden md:block">
+        <Image
+          src={srcDesktop ?? srcMobile}
+          alt={alt}
+          fill
+          onLoad={() => setLoaded(true)}
+          className={`object-cover scale-105 group-hover:scale-110 transition-[transform,opacity] duration-700 ease-out ${
+            loaded ? 'opacity-100' : 'opacity-0'
+          }`}
+        />
+      </div>
       <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition-colors duration-500" />
     </div>
   )
@@ -65,7 +79,11 @@ export default function Experience() {
               }`}
             >
               {/* Image Column */}
-              <ExperienceImage src={exp.image} alt={exp.company} />
+              <ExperienceImage
+                srcDesktop={exp.imageDesktop ?? exp.imageMobile ?? exp.image}
+                srcMobile={exp.imageMobile ?? exp.imageDesktop ?? exp.image}
+                alt={exp.company}
+              />
 
               {/* Content Column - Glassmorphic */}
               <div
@@ -178,12 +196,22 @@ export default function Experience() {
             >
               <div className="overflow-y-auto custom-scrollbar">
                 <div className="relative h-[300px] w-full">
-                  <Image
-                    src={selectedExp.image}
-                    alt={selectedExp.company}
-                    fill
-                    className="object-cover"
-                  />
+                  <div className="block md:hidden">
+                    <Image
+                      src={selectedExp.imageMobile ?? selectedExp.imageDesktop ?? selectedExp.image}
+                      alt={selectedExp.company}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="hidden md:block">
+                    <Image
+                      src={selectedExp.imageDesktop ?? selectedExp.imageMobile ?? selectedExp.image}
+                      alt={selectedExp.company}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-slate-900 via-white/10 dark:via-slate-900/10 to-transparent" />
                   <button
                     onClick={() => setSelectedExp(null)}
