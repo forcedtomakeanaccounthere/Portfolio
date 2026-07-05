@@ -1,5 +1,31 @@
 [
   {
+    "id": 2,
+    "company": "Wecofy Technotides",
+    "role": "Full Stack Developer Intern",
+    "duration": "Nov 2025 – Feb 2026",
+    "type": "industry",
+    "tech": [
+      "Next.js",
+      "Express.js",
+      "Firebase",
+      "Razorpay",
+      "Delhivery",
+      "Borzo"
+    ],
+    "summary": "Contributed to BhawBhaw, a pet marketplace, developing critical Admin and Seller dashboards while optimizing site SEO and performance.",
+    "detailed": [
+      "Developed high-performance Admin and Seller dashboards using Next.js and component-driven architecture.",
+      "Integrated third-party logistics APIs (Delhivery, Borzo) and automated slot booking systems.",
+      "Optimized backend API interactions, significantly reducing latency and boosting Lighthouse SEO scores.",
+      "Implemented secure payment webhooks and transaction auditing using Razorpay."
+    ],
+    "image": "https://images.pexels.com/photos/6958710/pexels-photo-6958710.jpeg",
+    "imageDesktop": "https://images.pexels.com/photos/6958710/pexels-photo-6958710.jpeg",
+    "imageMobile": "https://images.pexels.com/photos/6958710/pexels-photo-6958710.jpeg",
+    "url": "https://www.bhawbhaw.com/"
+  },
+  {
     "id": 1,
     "company": "Muktifresh",
     "role": "SDE Intern",
@@ -25,32 +51,6 @@
     "imageDesktop": "https://images.pexels.com/photos/4451871/pexels-photo-4451871.jpeg",
     "imageMobile": "https://images.pexels.com/photos/4451871/pexels-photo-4451871.jpeg",
     "url": "https://muktifresh.in/"
-  },
-  {
-    "id": 2,
-    "company": "Wecofy Technotides",
-    "role": "Full Stack Developer Intern",
-    "duration": "Nov 2025 – Feb 2026",
-    "type": "industry",
-    "tech": [
-      "Next.js",
-      "Express.js",
-      "Firebase",
-      "Razorpay",
-      "Delhivery",
-      "Borzo"
-    ],
-    "summary": "Contributed to BhawBhaw, a pet marketplace, developing critical Admin and Seller dashboards while optimizing site SEO and performance.",
-    "detailed": [
-      "Developed high-performance Admin and Seller dashboards using Next.js and component-driven architecture.",
-      "Integrated third-party logistics APIs (Delhivery, Borzo) and automated slot booking systems.",
-      "Optimized backend API interactions, significantly reducing latency and boosting Lighthouse SEO scores.",
-      "Implemented secure payment webhooks and transaction auditing using Razorpay."
-    ],
-    "image": "https://images.pexels.com/photos/6958710/pexels-photo-6958710.jpeg",
-    "imageDesktop": "https://images.pexels.com/photos/6958710/pexels-photo-6958710.jpeg",
-    "imageMobile": "https://images.pexels.com/photos/6958710/pexels-photo-6958710.jpeg",
-    "url": "https://www.bhawbhaw.com/"
   },
   {
     "id": 3,
