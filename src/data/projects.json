@@ -1,5 +1,35 @@
 [
   {
+    "id": "milestone",
+    "name": "Milestone",
+    "tagline": "Find Work. Hire Talent. Grow Together.",
+    "description": "A multi-role freelancing ecosystem featuring secure role-based access, real-time collaboration via Socket.IO, and comprehensive project governance tools.",
+    "fullDescription": [
+      "Architected a multi-role platform (Admin/Employer/Freelancer) with secure session-based authentication and OTP flows.",
+      "Engineered real-time collaboration using Socket.IO, featuring typing indicators, live presence, and a robust notification system.",
+      "Implemented complex hiring workflows: job management for employers and application/resume tracking for freelancers.",
+      "Built an advanced admin control surface for analytics, content moderation, and platform governance.",
+      "Designed a skills credentialing system with admin-created quizzes and automated badge issuance.",
+      "Integrated subscription mechanics for premium platform features and sponsored listing visibility."
+    ],
+    "techStack": [
+      "React",
+      "Express.js",
+      "MongoDB",
+      "Socket.io",
+      "Node.js",
+      "Framer Motion"
+    ],
+    "githubLink": "https://github.com/forcedtomakeanaccounthere",
+    "liveLink": "https://milestone-freelancing-website.vercel.app/",
+    "image": "/uploads/1783278316187_Screenshot_2026-07-06_003501.png",
+    "gallery": [
+      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2070&auto=format&fit=crop"
+    ]
+  },
+  {
     "id": "youtube-mate",
     "name": "YouTube-Mate",
     "tagline": "Your AI-Powered YouTube Companion. Ordinary Reimagined.",
@@ -29,36 +59,6 @@
       "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=1974&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop"
-    ]
-  },
-  {
-    "id": "milestone",
-    "name": "Milestone",
-    "tagline": "Find Work. Hire Talent. Grow Together.",
-    "description": "A multi-role freelancing ecosystem featuring secure role-based access, real-time collaboration via Socket.IO, and comprehensive project governance tools.",
-    "fullDescription": [
-      "Architected a multi-role platform (Admin/Employer/Freelancer) with secure session-based authentication and OTP flows.",
-      "Engineered real-time collaboration using Socket.IO, featuring typing indicators, live presence, and a robust notification system.",
-      "Implemented complex hiring workflows: job management for employers and application/resume tracking for freelancers.",
-      "Built an advanced admin control surface for analytics, content moderation, and platform governance.",
-      "Designed a skills credentialing system with admin-created quizzes and automated badge issuance.",
-      "Integrated subscription mechanics for premium platform features and sponsored listing visibility."
-    ],
-    "techStack": [
-      "React",
-      "Express.js",
-      "MongoDB",
-      "Socket.io",
-      "Node.js",
-      "Framer Motion"
-    ],
-    "githubLink": "https://github.com/forcedtomakeanaccounthere",
-    "liveLink": "https://milestone-freelancing-website.vercel.app/",
-    "image": "/uploads/1783278316187_Screenshot_2026-07-06_003501.png",
-    "gallery": [
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2070&auto=format&fit=crop"
     ]
   },
   {
