@@ -11,7 +11,7 @@ export default function Projects() {
   const featuredProjects = projects.slice(0, 3);
 
   return (
-    <section id="projects" className="py-32 bg-white">
+    <section id="projects" className="py-32 bg-white dark:bg-[#0b0e14] transition-colors duration-300">
       <div className="max-w-[1200px] mx-auto px-6">
         <div className="text-center mb-24">
           <h2 className="text-[1.2rem] font-bold text-[#DC143C] uppercase tracking-[0.4em] mb-4">
@@ -35,7 +35,7 @@ export default function Projects() {
         <div className="mt-20 text-center">
           <Link 
             href="/project" 
-            className="inline-flex items-center gap-4 px-12 py-5 bg-[#29323C] text-white text-[1.6rem] font-bold rounded-2xl hover:bg-[#DC143C] transition-all duration-300 shadow-xl shadow-slate-200 group"
+            className="inline-flex items-center gap-4 px-12 py-5 bg-[#29323C] text-white text-[1.6rem] font-bold rounded-2xl hover:bg-[#DC143C] transition-all duration-300 shadow-xl shadow-slate-200 dark:shadow-black/30 group"
           >
             See All Projects
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover:translate-x-2">

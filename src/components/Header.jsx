@@ -2,6 +2,17 @@
 
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
+import { motion, AnimatePresence } from 'motion/react'
+import ThemeToggle from './ThemeToggle'
+
+const NAV_ITEMS = [
+  { label: 'Home', href: '/#hero' },
+  { label: 'Experience', href: '/#experience' },
+  { label: 'Projects', href: '/#projects' },
+  { label: 'Skills', href: '/#skills' },
+  { label: 'About', href: '/#about' },
+  { label: 'Contact', href: '/#contact' },
+]
 
 export default function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false)
@@ -45,6 +56,16 @@ export default function Header() {
           </div>
 
           <nav className="nav-list">
+            <ul className="nav-desktop-list" role="list">
+              {NAV_ITEMS.map((item) => (
+                <li key={item.label}>
+                  <a href={item.href}>{item.label}</a>
+                </li>
+              ))}
+            </ul>
+              
+            <ThemeToggle className="theme-toggle-desktop" />
+
             <button
               className={`hamburger ${isNavOpen ? 'active' : ''}`}
               onClick={toggleNav}
@@ -53,18 +74,52 @@ export default function Header() {
             >
               <div className="bar"></div>
             </button>
-
-            <ul className={isNavOpen ? 'active' : ''} role="list">
-              <li><a href="/#hero" onClick={closeNav}>Home</a></li>
-              <li><a href="/#experience" onClick={closeNav}>Experience</a></li>
-              <li><a href="/#projects" onClick={closeNav}>Projects</a></li>
-              <li><a href="/#skills" onClick={closeNav}>Skills</a></li>
-              <li><a href="/#about" onClick={closeNav}>About</a></li>
-              <li><a href="/#contact" onClick={closeNav}>Contact</a></li>
-            </ul>
           </nav>
         </div>
       </div>
+
+      {/* Mobile drawer: 60% glass panel + glass backdrop on remaining 40% */}
+      <AnimatePresence>
+        {isNavOpen && (
+          <>
+            <motion.div
+              key="mobile-nav-backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={closeNav}
+              className="mobile-nav-backdrop"
+              aria-hidden="true"
+            />
+            <motion.div
+              key="mobile-nav-drawer"
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              className="mobile-nav-drawer"
+            >
+              <div className="mobile-nav-drawer-top">
+                <ThemeToggle className="theme-toggle-mobile" />
+              </div>
+              <ul role="list">
+                {NAV_ITEMS.map((item, i) => (
+                  <motion.li
+                    key={item.label}
+                    initial={{ opacity: 0, x: 40 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 20 }}
+                    transition={{ delay: 0.15 + i * 0.07, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <a href={item.href} onClick={closeNav}>{item.label}</a>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </header>
   )
 }

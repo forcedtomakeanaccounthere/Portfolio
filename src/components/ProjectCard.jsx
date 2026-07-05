@@ -1,10 +1,12 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'motion/react';
 
 export default function ProjectCard({ project, onSeeMore, index }) {
   const isEven = index % 2 === 0;
+  const [imgLoaded, setImgLoaded] = useState(false);
 
   return (
     <motion.div
@@ -17,14 +19,18 @@ export default function ProjectCard({ project, onSeeMore, index }) {
       } mb-40 md:mb-60 last:mb-0`}
     >
       {/* Cinematic Image Container - High Asymmetry */}
-      <div className={`relative w-full md:w-[60%] aspect-[16/10] sm:aspect-[4/3] md:aspect-[16/10] rounded-[2.5rem] md:rounded-[4rem] overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.2)] z-0 transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:shadow-[0_60px_120px_rgba(0,0,0,0.3)] ${
+      <div className={`relative w-full md:w-[60%] aspect-[16/10] sm:aspect-[4/3] md:aspect-[16/10] rounded-[2.5rem] md:rounded-[4rem] overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.2)] z-0 bg-slate-200 dark:bg-slate-800 transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:shadow-[0_60px_120px_rgba(0,0,0,0.3)] isolate ${
         isEven ? 'rotate-[-2deg] group-hover:rotate-0' : 'rotate-[2deg] group-hover:rotate-0'
-      }`}>
+      }`} style={{ transform: 'translateZ(0)' }}>
         <Image
           src={project.image}
           alt={project.name}
           fill
-          className="object-cover transition-transform duration-[1500ms] ease-out group-hover:scale-110"
+          onLoad={() => setImgLoaded(true)}
+          className={`object-cover transition-[transform,opacity] duration-[1500ms] ease-out group-hover:scale-110 ${
+            imgLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+          style={{ backfaceVisibility: 'hidden', transform: 'translateZ(0)' }}
         />
         <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition-colors duration-700" />
         
@@ -36,19 +42,18 @@ export default function ProjectCard({ project, onSeeMore, index }) {
 
       {/* High-Concept Content Panel - Deep Overlap */}
       <div
-        className={`w-[92%] md:w-3/5 p-10 md:p-20 backdrop-blur-3xl bg-white/80 border border-white/50 shadow-[0_30px_60px_rgba(0,0,0,0.12)] rounded-[3rem] -mt-24 md:mt-0 relative z-10 transition-all duration-700 hover:shadow-[0_40px_100px_rgba(0,0,0,0.18)] ${
+        className={`w-[92%] md:w-3/5 p-10 md:p-20 backdrop-blur-3xl bg-white/80 dark:bg-slate-900/80 border border-white/50 dark:border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.12)] rounded-[3rem] -mt-24 md:mt-0 relative z-[20] transition-all duration-700 hover:shadow-[0_40px_100px_rgba(0,0,0,0.18)] isolate ${
           isEven ? 'md:-ml-32 lg:-ml-48' : 'md:-mr-32 lg:-mr-48'
         }`}
       >
         <div className="flex flex-col gap-6 mb-10">
           <div className="flex items-center gap-4">
             <span className="text-[1.1rem] font-black text-[#DC143C] uppercase tracking-[0.1em]">
-              {/* Case Study */}
               {project.tagline}
             </span>
             <div className="h-[2px] w-12 bg-[#DC143C]/20" />
           </div>
-          <h3 className="text-[4rem] md:text-[6rem] font-[900] text-slate-900 leading-[0.9] tracking-tightest group-hover:text-black transition-colors">
+          <h3 className="text-[4rem] md:text-[6rem] font-[900] text-slate-900 dark:text-slate-100 leading-[0.9] tracking-tightest group-hover:text-black dark:group-hover:text-white transition-colors">
             {project.name}
           </h3>
         </div>
@@ -57,19 +62,19 @@ export default function ProjectCard({ project, onSeeMore, index }) {
           {project.techStack.slice(0, 5).map((tech) => (
             <span
               key={tech}
-              className="px-5 py-2 text-[1.2rem] bg-slate-50 border border-slate-100 text-slate-500 rounded-xl font-bold transition-all duration-300 hover:border-[#DC143C]/30 hover:text-[#DC143C]"
+              className="px-5 py-2 text-[1.2rem] bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-300 rounded-xl font-bold transition-all duration-300 hover:border-[#DC143C]/30 hover:text-[#DC143C]"
             >
               {tech}
             </span>
           ))}
           {project.techStack.length > 5 && (
-            <span className="px-3 py-2 text-[1.2rem] text-slate-300 font-black">
+            <span className="px-3 py-2 text-[1.2rem] text-slate-300 dark:text-slate-600 font-black">
               +
             </span>
           )}
         </div>
 
-        <p className="text-[1.9rem] text-slate-600 leading-[1.6] font-light mb-14 line-clamp-2 md:line-clamp-none">
+        <p className="text-[1.9rem] text-slate-600 dark:text-slate-400 leading-[1.6] font-light mb-14 line-clamp-2 md:line-clamp-none">
           {project.description}
         </p>
 
@@ -90,7 +95,7 @@ export default function ProjectCard({ project, onSeeMore, index }) {
                 href={project.githubLink} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="p-4 bg-slate-50 hover:bg-slate-100 rounded-[1.2rem] transition-all duration-300 text-slate-400 hover:text-slate-900 hover:rotate-6 active:scale-90 shadow-sm"
+                className="p-4 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-[1.2rem] transition-all duration-300 text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 hover:rotate-6 active:scale-90 shadow-sm"
                 title="GitHub"
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -103,7 +108,7 @@ export default function ProjectCard({ project, onSeeMore, index }) {
                 href={project.liveLink} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="p-4 bg-slate-50 hover:bg-slate-100 rounded-[1.2rem] transition-all duration-300 text-[#DC143C] hover:rotate-[-6deg] active:scale-90 shadow-sm"
+                className="p-4 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-[1.2rem] transition-all duration-300 text-[#DC143C] hover:rotate-[-6deg] active:scale-90 shadow-sm"
                 title="Live Site"
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

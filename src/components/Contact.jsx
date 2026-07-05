@@ -49,12 +49,12 @@ const CARDS = [
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-24 bg-[#f3f4f7]">
+    <section id="contact" className="py-24 bg-[#f3f4f7] dark:bg-[#10131a] transition-colors duration-300">
       <div className="max-w-[1200px] mx-auto px-6">
         {/* Heading */}
         <div className="text-center mb-16">
           <h1 className="section-title">Contact <span>Me</span></h1>
-          <p className="text-[1.6rem] text-slate-500 mt-4 font-light">
+          <p className="text-[1.6rem] text-slate-500 dark:text-slate-400 mt-4 font-light">
             Let&apos;s connect and create something amazing together.
           </p>
         </div>
@@ -67,19 +67,19 @@ export default function Contact() {
               href={card.href}
               target={card.href.startsWith('mailto') ? '_self' : '_blank'}
               rel="noopener noreferrer"
-              className="group bg-white rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.13)] transition-all duration-400 overflow-hidden flex flex-col"
+              className="group bg-white dark:bg-[#151922] rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.07)] dark:shadow-[0_4px_24px_rgba(0,0,0,0.4)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.13)] dark:hover:shadow-[0_8px_40px_rgba(0,0,0,0.55)] transition-all duration-400 overflow-hidden flex flex-col"
             >
               {/* Card top */}
               <div className="px-7 pt-7 pb-5 flex items-start justify-between">
                 <div>
-                  <h2 className="text-[2rem] font-bold text-[#1a1a1a] mb-2 leading-tight">
+                  <h2 className="text-[2rem] font-bold text-[#1a1a1a] dark:text-slate-100 mb-2 leading-tight">
                     {card.title}
                   </h2>
                   <p className="text-[1.4rem] text-[#DC143C] font-medium leading-snug">
                     {card.subtitle}
                   </p>
                 </div>
-                <span className="text-[#1a1a1a] mt-1 group-hover:text-[#DC143C] transition-colors duration-300 shrink-0 ml-4">
+                <span className="text-[#1a1a1a] dark:text-slate-300 mt-1 group-hover:text-[#DC143C] transition-colors duration-300 shrink-0 ml-4">
                   {card.icon}
                 </span>
               </div>

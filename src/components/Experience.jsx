@@ -8,6 +8,25 @@ import { experiences } from '@/data/experiences'
 
 const featuredExperiences = experiences.slice(0, 2)
 
+function ExperienceImage({ src, alt }) {
+  const [loaded, setLoaded] = useState(false)
+
+  return (
+    <div className="w-full md:w-1/2 group relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl bg-slate-200 dark:bg-slate-800">
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        onLoad={() => setLoaded(true)}
+        className={`object-cover scale-105 group-hover:scale-110 transition-[transform,opacity] duration-700 ease-out ${
+          loaded ? 'opacity-100' : 'opacity-0'
+        }`}
+      />
+      <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition-colors duration-500" />
+    </div>
+  )
+}
+
 export default function Experience() {
   const [selectedExp, setSelectedExp] = useState(null)
 
@@ -21,7 +40,7 @@ export default function Experience() {
   }, [selectedExp])
 
   return (
-    <section id="experience" className="py-32 bg-[#F9F9F9] selection:bg-crimson/10">
+    <section id="experience" className="py-32 bg-[#F9F9F9] dark:bg-[#0b0e14] selection:bg-crimson/10 transition-colors duration-300">
       <div className="max-w-[1200px] mx-auto px-6">
         <div className="text-center mb-24">
           <h1 className="section-title">Exp<span>e</span>rience</h1>
@@ -46,19 +65,11 @@ export default function Experience() {
               }`}
             >
               {/* Image Column */}
-              <div className="w-full md:w-1/2 group relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
-                <Image
-                  src={exp.image}
-                  alt={exp.company}
-                  fill
-                  className="object-cover scale-105 group-hover:scale-110 transition-transform duration-700 ease-out"
-                />
-                <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition-colors duration-500" />
-              </div>
+              <ExperienceImage src={exp.image} alt={exp.company} />
 
               {/* Content Column - Glassmorphic */}
               <div
-                className={`w-[92%] md:w-3/5 p-8 md:p-14 backdrop-blur-2xl bg-white/80 border border-white/40 shadow-[0_20px_50px_rgba(0,0,0,0.1)] rounded-2xl -mt-16 md:mt-0 relative z-10 transition-all duration-500 hover:shadow-[0_30px_60px_rgba(0,0,0,0.15)] ${
+                className={`w-[92%] md:w-3/5 p-8 md:p-14 backdrop-blur-2xl bg-white/80 dark:bg-slate-900/80 border border-white/40 dark:border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.1)] rounded-2xl -mt-16 md:mt-0 relative z-10 transition-all duration-500 hover:shadow-[0_30px_60px_rgba(0,0,0,0.15)] ${
                   index % 2 === 0 ? 'md:-ml-24' : 'md:-mr-24'
                 }`}
               >
@@ -67,11 +78,11 @@ export default function Experience() {
                     <h2 className="text-[1.2rem] font-bold text-[#DC143C] uppercase tracking-[0.2em] mb-2">
                       {exp.role}
                     </h2>
-                    <h3 className="text-[2.8rem] font-light text-[#29323C] leading-tight">
+                    <h3 className="text-[2.8rem] font-light text-[#29323C] dark:text-slate-100 leading-tight">
                       {exp.company}
                     </h3>
                   </div>
-                  <span className="text-[1.3rem] text-gray-400 font-medium tabular-nums shrink-0">
+                  <span className="text-[1.3rem] text-gray-400 dark:text-slate-400 font-medium tabular-nums shrink-0">
                     {exp.duration}
                   </span>
                 </div>
@@ -80,25 +91,25 @@ export default function Experience() {
                   {exp.tech.slice(0, 5).map((t) => (
                     <span
                       key={t}
-                      className="px-4 py-1.5 text-[1.1rem] border border-slate-200 text-slate-600 rounded-full font-medium hover:border-slate-800 hover:text-slate-800 transition-colors cursor-default"
+                      className="px-4 py-1.5 text-[1.1rem] border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 rounded-full font-medium hover:border-slate-800 dark:hover:border-slate-400 hover:text-slate-800 dark:hover:text-slate-100 transition-colors cursor-default"
                     >
                       {t}
                     </span>
                   ))}
                   {exp.tech.length > 5 && (
-                    <span className="px-3 py-1.5 text-[1.1rem] text-slate-400 font-medium">
+                    <span className="px-3 py-1.5 text-[1.1rem] text-slate-400 dark:text-slate-500 font-medium">
                       +{exp.tech.length - 5}
                     </span>
                   )}
                 </div>
 
-                <p className="text-[1.7rem] text-slate-500 leading-relaxed font-light mb-10">
+                <p className="text-[1.7rem] text-slate-500 dark:text-slate-400 leading-relaxed font-light mb-10">
                   {exp.summary}
                 </p>
 
                 <button
                   onClick={() => setSelectedExp(exp)}
-                  className="inline-flex items-center gap-3 text-[1.4rem] font-bold text-[#29323C] hover:text-[#DC143C] transition-all duration-300 group"
+                  className="inline-flex items-center gap-3 text-[1.4rem] font-bold text-[#29323C] dark:text-slate-100 hover:text-[#DC143C] transition-all duration-300 group"
                 >
                   <span className="relative">
                     See Details
@@ -128,7 +139,7 @@ export default function Experience() {
         >
           <Link
             href="/experience"
-            className="inline-flex items-center gap-4 px-12 py-5 bg-[#29323C] text-white text-[1.6rem] font-bold rounded-2xl hover:bg-[#DC143C] transition-all duration-300 shadow-xl shadow-slate-200 group"
+            className="inline-flex items-center gap-4 px-12 py-5 bg-[#29323C] text-white text-[1.6rem] font-bold rounded-2xl hover:bg-[#DC143C] transition-all duration-300 shadow-xl shadow-slate-200 dark:shadow-black/30 group"
           >
             See More
             <svg
@@ -163,7 +174,7 @@ export default function Experience() {
               animate={{ y: 0, opacity: 1, scale: 1 }}
               exit={{ y: 50, opacity: 0, scale: 0.95 }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="relative w-full max-w-[900px] max-h-[90vh] bg-white rounded-2xl shadow-[0_50px_100px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col"
+              className="relative w-full max-w-[900px] max-h-[90vh] bg-white dark:bg-slate-900 rounded-2xl shadow-[0_50px_100px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col"
             >
               <div className="overflow-y-auto custom-scrollbar">
                 <div className="relative h-[300px] w-full">
@@ -173,7 +184,7 @@ export default function Experience() {
                     fill
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-white via-white/10 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-slate-900 via-white/10 dark:via-slate-900/10 to-transparent" />
                   <button
                     onClick={() => setSelectedExp(null)}
                     className="absolute top-6 right-6 p-3 bg-black/20 hover:bg-black/40 backdrop-blur-xl rounded-full text-white transition-all duration-300 hover:rotate-90"
@@ -185,30 +196,30 @@ export default function Experience() {
                   </button>
                 </div>
 
-                <div className="px-8 md:px-20 pb-24 -mt-24 relative z-10 bg-gradient-to-b from-transparent via-white to-white">
+                <div className="px-8 md:px-20 pb-24 -mt-24 relative z-10 bg-gradient-to-b from-transparent via-white dark:via-slate-900 to-white dark:to-slate-900">
                   <header className="mb-12">
-                    <h2 className="text-[4rem] font-bold text-slate-900 leading-[1.1] mb-4 tracking-tight">
+                    <h2 className="text-[4rem] font-bold text-slate-900 dark:text-slate-100 leading-[1.1] mb-4 tracking-tight">
                       {selectedExp.role}
                     </h2>
                     <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
                       <span className="text-[2.2rem] font-medium text-[#DC143C]">
                         {selectedExp.company}
                       </span>
-                      <div className="h-4 w-[1px] bg-slate-300 hidden sm:block" />
-                      <span className="text-[1.5rem] text-slate-400 italic">
+                      <div className="h-4 w-[1px] bg-slate-300 dark:bg-slate-700 hidden sm:block" />
+                      <span className="text-[1.5rem] text-slate-400 dark:text-slate-500 italic">
                         {selectedExp.duration}
                       </span>
                     </div>
                   </header>
 
                   <article className="prose prose-xl max-w-none">
-                    <p className="text-[2rem] text-slate-600 leading-[1.8] font-light mb-16 first-letter:text-7xl first-letter:font-bold first-letter:text-[#DC143C] first-letter:mr-4 first-letter:float-left first-letter:mt-2">
+                    <p className="text-[2rem] text-slate-600 dark:text-slate-300 leading-[1.8] font-light mb-16 first-letter:text-7xl first-letter:font-bold first-letter:text-[#DC143C] first-letter:mr-4 first-letter:float-left first-letter:mt-2">
                       {selectedExp.summary}
                     </p>
 
                     <div className="grid md:grid-cols-2 gap-12">
                       <div>
-                        <h4 className="text-[1.3rem] font-bold uppercase tracking-[0.2em] text-slate-900 mb-8 flex items-center gap-3">
+                        <h4 className="text-[1.3rem] font-bold uppercase tracking-[0.2em] text-slate-900 dark:text-slate-100 mb-8 flex items-center gap-3">
                           <span className="w-8 h-[2px] bg-[#DC143C]" />
                           Impact & Contributions
                         </h4>
@@ -220,7 +231,7 @@ export default function Experience() {
                                   <path d="M1 4L3.5 6.5L9 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                               </span>
-                              <p className="text-[1.6rem] text-slate-600 leading-relaxed font-light">
+                              <p className="text-[1.6rem] text-slate-600 dark:text-slate-300 leading-relaxed font-light">
                                 {point}
                               </p>
                             </li>
@@ -230,13 +241,13 @@ export default function Experience() {
 
                       <div className="space-y-12">
                         <div>
-                          <h4 className="text-[1.3rem] font-bold uppercase tracking-[0.2em] text-slate-900 mb-8 flex items-center gap-3">
+                          <h4 className="text-[1.3rem] font-bold uppercase tracking-[0.2em] text-slate-900 dark:text-slate-100 mb-8 flex items-center gap-3">
                             <span className="w-8 h-[2px] bg-[#DC143C]" />
                             Technology Stack
                           </h4>
                           <div className="flex flex-wrap gap-3">
                             {selectedExp.tech.map((t) => (
-                              <span key={t} className="px-4 py-2 bg-slate-50 border border-slate-100 rounded-lg text-[1.3rem] text-slate-600 font-medium">
+                              <span key={t} className="px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-lg text-[1.3rem] text-slate-600 dark:text-slate-300 font-medium">
                                 {t}
                               </span>
                             ))}
@@ -244,12 +255,12 @@ export default function Experience() {
                         </div>
 
                         {selectedExp.url && (
-                          <div className="pt-8 border-t border-slate-100">
+                          <div className="pt-8 border-t border-slate-100 dark:border-slate-800">
                             <a
                               href={selectedExp.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-3 px-8 py-4 bg-[#29323C] text-white text-[1.4rem] font-bold rounded-xl hover:bg-[#DC143C] transition-all duration-300 shadow-lg shadow-slate-200"
+                              className="inline-flex items-center gap-3 px-8 py-4 bg-[#29323C] text-white text-[1.4rem] font-bold rounded-xl hover:bg-[#DC143C] transition-all duration-300 shadow-lg shadow-slate-200 dark:shadow-black/30"
                             >
                               Visit Website
                               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

@@ -1,6 +1,5 @@
 'use client'
 
-import { useRef, useEffect } from 'react'
 import Link from 'next/link'
 
 const QUICK_LINKS = [
@@ -74,49 +73,14 @@ const SOCIAL = [
 ]
 
 export default function Footer() {
-  const videoRef = useRef(null)
-
-  // Forward → reverse → forward loop
-  useEffect(() => {
-    const video = videoRef.current
-    if (!video) return
-
-    let rafId = null
-    let isReversing = false
-
-    const reverseStep = () => {
-      if (!video) return
-      video.currentTime = Math.max(0, video.currentTime - 1 / 30)
-      if (video.currentTime <= 0.02) {
-        isReversing = false
-        video.play().catch(() => {})
-        return
-      }
-      rafId = requestAnimationFrame(reverseStep)
-    }
-
-    const onEnded = () => {
-      if (isReversing) return
-      isReversing = true
-      rafId = requestAnimationFrame(reverseStep)
-    }
-
-    video.addEventListener('ended', onEnded)
-    video.play().catch(() => {})
-
-    return () => {
-      video.removeEventListener('ended', onEnded)
-      if (rafId) cancelAnimationFrame(rafId)
-    }
-  }, [])
-
   return (
     <footer id="footer" className="relative overflow-hidden" style={{ minHeight: '520px', background: '#050510' }}>
-      {/* Background video */}
+      {/* Background video - plain forward loop */}
       <video
-        ref={videoRef}
         className="absolute inset-0 w-full h-full object-cover opacity-60"
-        src="/img/boat_footer.mp4"
+        src="/boat_footer_loop.av1.mp4"
+        autoPlay
+        loop
         muted
         playsInline
         preload="metadata"
