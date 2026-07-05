@@ -1,5 +1,32 @@
 [
   {
+    "id": 1,
+    "company": "Muktifresh",
+    "role": "SDE Intern",
+    "duration": "Aug 2025 – Present",
+    "type": "industry",
+    "tech": [
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "React",
+      "Tailwind CSS",
+      "Socket.IO",
+      "Razorpay"
+    ],
+    "summary": "Engineered a production-ready grocery ecosystem for quick commerce website Muktifresh, with modular Admin, User, and POS panels, robust inventory management, and real-time order lifecycle tracking.",
+    "detailed": [
+      "Architected modular panels with secure role-based access for diverse user personas.",
+      "Developed a centralized stock ledger and automated reconciliation workflows for inventory accuracy.",
+      "Streamlined end-to-end fulfillment logistics, including trip logs and pincode-based routing.",
+      "Implemented real-time live order updates and comprehensive audit trails via Socket.IO."
+    ],
+    "image": "https://images.pexels.com/photos/4451871/pexels-photo-4451871.jpeg",
+    "imageDesktop": "https://images.pexels.com/photos/4451871/pexels-photo-4451871.jpeg",
+    "imageMobile": "https://images.pexels.com/photos/4451871/pexels-photo-4451871.jpeg",
+    "url": "https://muktifresh.in/"
+  },
+  {
     "id": 2,
     "company": "Wecofy Technotides",
     "role": "Full Stack Developer Intern",
@@ -50,33 +77,6 @@
     "imageDesktop": "/uploads/1783265772999_ChatGPT_Image_Jul_5__2026__09_04_53_PM.png",
     "imageMobile": "/uploads/1783259768381_WhatsApp_Image_2026-06-15_at_7.10.13_PM.jpeg",
     "url": null
-  },
-  {
-    "id": 1,
-    "company": "Muktifresh",
-    "role": "SDE Intern",
-    "duration": "Aug 2025 – Present",
-    "type": "industry",
-    "tech": [
-      "Node.js",
-      "Express",
-      "MongoDB",
-      "React",
-      "Tailwind CSS",
-      "Socket.IO",
-      "Razorpay"
-    ],
-    "summary": "Engineered a production-ready grocery ecosystem for quick commerce website Muktifresh, with modular Admin, User, and POS panels, robust inventory management, and real-time order lifecycle tracking.",
-    "detailed": [
-      "Architected modular panels with secure role-based access for diverse user personas.",
-      "Developed a centralized stock ledger and automated reconciliation workflows for inventory accuracy.",
-      "Streamlined end-to-end fulfillment logistics, including trip logs and pincode-based routing.",
-      "Implemented real-time live order updates and comprehensive audit trails via Socket.IO."
-    ],
-    "image": "https://images.pexels.com/photos/4451871/pexels-photo-4451871.jpeg",
-    "imageDesktop": "https://images.pexels.com/photos/4451871/pexels-photo-4451871.jpeg",
-    "imageMobile": "https://images.pexels.com/photos/4451871/pexels-photo-4451871.jpeg",
-    "url": "https://muktifresh.in/"
   },
   {
     "id": 4,
