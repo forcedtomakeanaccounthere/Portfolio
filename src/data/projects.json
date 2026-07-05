@@ -62,6 +62,64 @@
     ]
   },
   {
+    "id": "sql-injection-prevention",
+    "name": "SQL Injection Prevention in Cloud Environments",
+    "tagline": "Advanced Cloud Security for Database Protection",
+    "description": "A comprehensive cloud security solution that prevents SQL injection attacks through custom algorithms and multi-layered AWS security architecture.",
+    "fullDescription": [
+      "Built and deployed a robust security platform on AWS using multiple cloud services and layered security mechanisms.",
+      "Developed custom SQL parsing algorithms to analyze and sanitize database queries in real-time.",
+      "Implemented Twofish encryption for sensitive data protection and secure query execution.",
+      "Ensures complete protection against SQLi attacks through proactive threat detection and prevention.",
+      "Integrated comprehensive monitoring and logging for security audit trails and compliance."
+    ],
+    "techStack": [
+      "AWS",
+      "Python",
+      "SQL",
+      "Cryptography",
+      "Cloud Security",
+      "Twofish Encryption"
+    ],
+    "githubLink": "https://github.com/forcedtomakeanaccounthere/Cloud-Computing-project",
+    "liveLink": "https://insure-pred-ai-8j4u.vercel.app/",
+    "image": "/uploads/1783279403025_Screenshot_2026-07-06_004358.png",
+    "gallery": [
+      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2070&auto=format&fit=crop"
+    ]
+  },
+  {
+    "id": "agri-ai-assistant",
+    "name": "AI-Driven Agricultural Assistant",
+    "tagline": "Smart Farming with AI-Powered Insights",
+    "description": "An intelligent agricultural tool that leverages AI and computer vision to enhance crop productivity through disease detection and soil analysis.",
+    "fullDescription": [
+      "Created an AI-powered agricultural assistant serving 50+ farmers in pilot testing phases.",
+      "Integrated image-based disease detection using computer vision with 90% accuracy for early crop protection.",
+      "Developed soil analysis algorithms to provide personalized fertilizer and irrigation recommendations.",
+      "Utilized machine learning models to analyze environmental factors and predict optimal growing conditions.",
+      "Designed user-friendly interface accessible to farmers with varying technical expertise."
+    ],
+    "techStack": [
+      "Python",
+      "Machine Learning",
+      "Computer Vision",
+      "Streamlit",
+      "TensorFlow",
+      "Data Science"
+    ],
+    "githubLink": "https://github.com/Shreyaan16/TeamAlpha",
+    "liveLink": "https://teamalpha-agriai.streamlit.app/",
+    "image": "/img/agriculture-ai.jpg",
+    "gallery": [
+      "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=2070&auto=format&fit=crop"
+    ]
+  },
+  {
     "id": "sarcasm-predictor",
     "name": "Sarcasm Predictor",
     "tagline": "",
@@ -113,32 +171,6 @@
     "gallery": [
       "https://images.unsplash.com/photo-1551288049-bbda64626d44?q=80&w=2070&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1543286386-713bdd548da4?q=80&w=2070&auto=format&fit=crop"
-    ]
-  },
-  {
-    "id": "marketing-analyzer",
-    "name": "Media & Marketing Analyzer",
-    "tagline": "",
-    "description": "A data-driven platform that evaluates the ROI of social media advertising by tracking conversion metrics and profitable revenue generation.",
-    "fullDescription": [
-      "Evaluates the effectiveness of marketing spend across various social media platforms.",
-      "Monitors real-time click-through rates and correlates them with actual purchase data.",
-      "Uses Deep Learning to predict which advertising channels will yield the highest ROI.",
-      "Visualizes complex marketing data into intuitive dashboards for strategic decision-making."
-    ],
-    "techStack": [
-      "Python",
-      "Machine Learning",
-      "Deep Learning",
-      "Data Analysis",
-      "NumPy"
-    ],
-    "githubLink": "https://github.com/forcedtomakeanaccounthere/media-and-marketing-investment",
-    "liveLink": null,
-    "image": "/img/media2.0.jpg",
-    "gallery": [
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1551288049-bbda64626d44?q=80&w=2070&auto=format&fit=crop"
     ]
   },
   {
