@@ -22,6 +22,8 @@
       "Implemented real-time live order updates and comprehensive audit trails via Socket.IO."
     ],
     "image": "https://images.pexels.com/photos/4451871/pexels-photo-4451871.jpeg",
+    "imageDesktop": "https://images.pexels.com/photos/4451871/pexels-photo-4451871.jpeg",
+    "imageMobile": "https://images.pexels.com/photos/4451871/pexels-photo-4451871.jpeg",
     "url": "https://muktifresh.in/"
   },
   {
@@ -46,6 +48,8 @@
       "Implemented secure payment webhooks and transaction auditing using Razorpay."
     ],
     "image": "https://images.pexels.com/photos/6958710/pexels-photo-6958710.jpeg",
+    "imageDesktop": "https://images.pexels.com/photos/6958710/pexels-photo-6958710.jpeg",
+    "imageMobile": "https://images.pexels.com/photos/6958710/pexels-photo-6958710.jpeg",
     "url": "https://www.bhawbhaw.com/"
   },
   {
@@ -69,7 +73,9 @@
       "Mentored junior developers and introduced structured learning pathways for aspiring AI/ML practitioners.",
       "Represented GDG at inter-college tech events, driving community growth and technical excellence."
     ],
-    "image": "/uploads/1783259768381_WhatsApp_Image_2026-06-15_at_7.10.13_PM.jpeg",
+    "image": "/uploads/1783263032159_ChatGPT_Image_Jul_5__2026__08_20_22_PM.png",
+    "imageDesktop": "/uploads/1783259768381_WhatsApp_Image_2026-06-15_at_7.10.13_PM.jpeg",
+    "imageMobile": "/uploads/1783259768381_WhatsApp_Image_2026-06-15_at_7.10.13_PM.jpeg",
     "url": null
   },
   {
@@ -93,6 +99,8 @@
       "Acted as a primary point of contact for AI/ML queries within the community, fostering a culture of knowledge sharing and collaborative learning."
     ],
     "image": "https://images.pexels.com/photos/6958710/pexels-photo-6958710.jpeg",
+    "imageDesktop": "https://images.pexels.com/photos/6958710/pexels-photo-6958710.jpeg",
+    "imageMobile": "https://images.pexels.com/photos/6958710/pexels-photo-6958710.jpeg",
     "url": null
   },
   {
@@ -117,6 +125,8 @@
       "Collaborated with cross-functional teams to ship research prototypes with real-world applicability and societal impact."
     ],
     "image": "https://images.pexels.com/photos/4451871/pexels-photo-4451871.jpeg",
+    "imageDesktop": "https://images.pexels.com/photos/4451871/pexels-photo-4451871.jpeg",
+    "imageMobile": "https://images.pexels.com/photos/4451871/pexels-photo-4451871.jpeg",
     "url": null
   },
   {
@@ -141,6 +151,8 @@
       "Collaborated on research projects exploring transfer learning and model optimization strategies for resource-constrained environments."
     ],
     "image": "https://images.pexels.com/photos/6958710/pexels-photo-6958710.jpeg",
+    "imageDesktop": "https://images.pexels.com/photos/6958710/pexels-photo-6958710.jpeg",
+    "imageMobile": "https://images.pexels.com/photos/6958710/pexels-photo-6958710.jpeg",
     "url": null
   }
 ]
