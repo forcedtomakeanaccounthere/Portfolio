@@ -3,13 +3,15 @@
 import Image from 'next/image'
 import * as motion from "motion/react-client"
 import { useState, useEffect } from 'react'
+import profile from '../data/profile.json'
+
 
 function DownloadButton() {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
     <a 
-      href="/Resume_Abhishek_Anand.pdf" 
+      href={profile.resumeLink} 
       className="cta"
     >
       Download Resume
@@ -45,12 +47,12 @@ export default function ResumePreview() {
           variants={previewVariants}
           className="resume-preview"
         >
-          <a href="/Resume_Abhishek_Anand.pdf" style={previewLink}>
+          <a href={profile.resumeLink} style={previewLink}>
             <div style={cardWrapper}>
               <div style={splashBackground} />
               <motion.div style={previewCard} variants={cardVariants}>
                 <Image 
-                  src="/img/Resume_preview.png" 
+                  src={profile.resumePreview} 
                   alt="Resume Preview" 
                   width={200}
                   height={264}

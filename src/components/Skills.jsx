@@ -1,22 +1,6 @@
+import skillCategories from '../data/skills.json'
+
 export default function Skills() {
-  const skillCategories = [
-    {
-      category: 'Languages',
-      skills: 'C/C++, Python, Java, JavaScript, TypeScript, SQL',
-    },
-    {
-      category: 'Full-Stack & Frameworks',
-      skills: 'Next.js, React.js, Node.js, Express, Redux, GraphQL, Tailwind CSS, HTML, MongoDB',
-    },
-    {
-      category: 'AI/ML & Research',
-      skills: 'Machine Learning, Deep Learning, TensorFlow, NumPy, Pandas, Scikit-learn',
-    },
-    {
-      category: 'Cloud & DevOps',
-      skills: 'AWS, Google Cloud, Docker, Git, GitHub, Linux',
-    },
-  ]
 
   return (
     <section id="skills" className="bg-white dark:bg-[#0b0e14] min-h-[600px] w-full py-20 px-4 scroll-mt-20 transition-colors duration-300">

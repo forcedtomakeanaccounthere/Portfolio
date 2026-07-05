@@ -1,0 +1,128 @@
+[
+  {
+    "id": "youtube-mate",
+    "name": "YouTube-Mate",
+    "tagline": "Your AI-Powered YouTube Companion. Ordinary Reimagined.",
+    "description": "A comprehensive full-stack YouTube management platform enabling streamlined downloads, AI-powered transcriptions, and real-time collaborative playlists.",
+    "fullDescription": [
+      "Architected and built a full-stack platform with streamlined Audio, Video, and Playlist download capabilities using yt-dlp.",
+      "Implemented an AI-powered transcription and summary generator for rapid content analysis.",
+      "Developed a real-time collaborative playlist manager with granular access controls (Editor, Viewer, Owner, Admin).",
+      "Integrated secure authentication via Google OAuth 2.0 and JWT, session management, and Stripe subscription billing.",
+      "Built a resilient media-processing system with background queuing, format conversion, and Cloudinary storage integration.",
+      "Utilized Nodemailer for collaborative invites and secure password reset workflows."
+    ],
+    "techStack": ["Next.js", "Express", "MongoDB", "TypeScript", "Tailwind CSS", "yt-dlp", "Stripe", "Cloudinary"],
+    "githubLink": "https://github.com/forcedtomakeanaccounthere",
+    "liveLink": "https://youtube-mate-mu.vercel.app/",
+    "image": "https://images.unsplash.com/photo-1707833558984-3293e794031c?q=80&w=2070&auto=format&fit=crop",
+    "gallery": [
+      "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=1974&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop"
+    ]
+  },
+  {
+    "id": "milestone",
+    "name": "Milestone",
+    "tagline": "Find Work. Hire Talent. Grow Together.",
+    "description": "A multi-role freelancing ecosystem featuring secure role-based access, real-time collaboration via Socket.IO, and comprehensive project governance tools.",
+    "fullDescription": [
+      "Architected a multi-role platform (Admin/Employer/Freelancer) with secure session-based authentication and OTP flows.",
+      "Engineered real-time collaboration using Socket.IO, featuring typing indicators, live presence, and a robust notification system.",
+      "Implemented complex hiring workflows: job management for employers and application/resume tracking for freelancers.",
+      "Built an advanced admin control surface for analytics, content moderation, and platform governance.",
+      "Designed a skills credentialing system with admin-created quizzes and automated badge issuance.",
+      "Integrated subscription mechanics for premium platform features and sponsored listing visibility."
+    ],
+    "techStack": ["React", "Express.js", "MongoDB", "Socket.io", "Node.js", "Framer Motion"],
+    "githubLink": "https://github.com/forcedtomakeanaccounthere",
+    "liveLink": "https://milestone-freelancing-website.vercel.app/",
+    "image": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2070&auto=format&fit=crop",
+    "gallery": [
+      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2070&auto=format&fit=crop"
+    ]
+  },
+  {
+    "id": "sarcasm-predictor",
+    "name": "Sarcasm Predictor",
+    "tagline": "",
+    "description": "An NLP-driven tool that distinguishes between genuine and sarcastic text using Deep Learning models trained on diverse social media datasets.",
+    "fullDescription": [
+      "Built a sentiment analysis engine specifically tuned for detecting sarcasm in short-form text.",
+      "Trained on extensive datasets from Newspaper Headlines and Twitter using LSTM and Word Embeddings.",
+      "Implemented advanced NLP preprocessing including tokenization, stop-word removal, and vectorization.",
+      "Showcases the power of Deep Learning in understanding nuanced human communication."
+    ],
+    "techStack": ["Python", "TensorFlow", "NLP", "Deep Learning", "Keras", "NumPy", "Pandas"],
+    "githubLink": "https://github.com/forcedtomakeanaccounthere/sarcasm_detector",
+    "liveLink": "https://portfolio-abhishek-anand.vercel.app/",
+    "image": "/img/sarcasm.jpg",
+    "gallery": [
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1546776310-eef45dd6d63c?q=80&w=2010&auto=format&fit=crop"
+    ]
+  },
+  {
+    "id": "churn-prevention",
+    "name": "Churn Prevention System",
+    "tagline": "",
+    "description": "An intelligent analytical engine that identifies at-risk telecom customers and generates personalized retention offers through predictive modeling.",
+    "fullDescription": [
+      "Analyzed large-scale telecom datasets to identify key behavioral indicators of customer churn.",
+      "Developed a predictive model using Machine Learning algorithms to flag high-risk accounts.",
+      "Integrated a content-based filtering system to recommend targeted offers designed to reduce attrition.",
+      "Provides actionable insights for business stakeholders to improve customer lifetime value."
+    ],
+    "techStack": ["Python", "Machine Learning", "Pandas", "Scikit-Learn", "Recommender Systems"],
+    "githubLink": "https://github.com/forcedtomakeanaccounthere/Churn-prevention-recommender-system",
+    "liveLink": null,
+    "image": "/img/churn2.0.jpg",
+    "gallery": [
+      "https://images.unsplash.com/photo-1551288049-bbda64626d44?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1543286386-713bdd548da4?q=80&w=2070&auto=format&fit=crop"
+    ]
+  },
+  {
+    "id": "marketing-analyzer",
+    "name": "Media & Marketing Analyzer",
+    "tagline": "",
+    "description": "A data-driven platform that evaluates the ROI of social media advertising by tracking conversion metrics and profitable revenue generation.",
+    "fullDescription": [
+      "Evaluates the effectiveness of marketing spend across various social media platforms.",
+      "Monitors real-time click-through rates and correlates them with actual purchase data.",
+      "Uses Deep Learning to predict which advertising channels will yield the highest ROI.",
+      "Visualizes complex marketing data into intuitive dashboards for strategic decision-making."
+    ],
+    "techStack": ["Python", "Machine Learning", "Deep Learning", "Data Analysis", "NumPy"],
+    "githubLink": "https://github.com/forcedtomakeanaccounthere/media-and-marketing-investment",
+    "liveLink": null,
+    "image": "/img/media2.0.jpg",
+    "gallery": [
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1551288049-bbda64626d44?q=80&w=2070&auto=format&fit=crop"
+    ]
+  },
+  {
+    "id": "crop-recommender",
+    "name": "Crop Recommender System",
+    "tagline": "",
+    "description": "An agricultural optimization tool that uses environmental data to recommend ideal crops, maximizing yield and farmer sustainability.",
+    "fullDescription": [
+      "Analyzes regional weather and soil conditions including temperature, rainfall, humidity, and pH levels.",
+      "Applies Machine Learning to match environmental profiles with optimal crop varieties.",
+      "Designed to assist farmers in making data-backed decisions for sustainable land use.",
+      "Significantly improves potential crop yield by reducing the trial-and-error nature of farming."
+    ],
+    "techStack": ["Python", "Machine Learning", "Scikit-Learn", "Pandas", "Data Science"],
+    "githubLink": "https://github.com/forcedtomakeanaccounthere/crop_recommendation",
+    "liveLink": null,
+    "image": "/img/img-1.png",
+    "gallery": [
+      "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2032&auto=format&fit=crop"
+    ]
+  }
+]

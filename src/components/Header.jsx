@@ -47,7 +47,7 @@ export default function Header() {
     <header id="header" className={`header ${showScrolled ? 'scrolled' : ''}`}>
       <div className="nav-wrapper">
         <div className="nav-bar">
-          <div className="brand">
+          <div className="brand mr-2 -ml-9">
             <a href="/#hero">
               <h1 id="namee">
                 <span>A</span>bhishek <span>A</span>nand

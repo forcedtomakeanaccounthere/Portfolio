@@ -1,11 +1,12 @@
 import Image from 'next/image'
+import profile from '../data/profile.json'
 
-const CARDS = [
+const getCards = (profile) => [
   {
     key: 'linkedin',
     title: 'LinkedIn',
     subtitle: 'Connect with me on LinkedIn',
-    href: 'https://www.linkedin.com/in/abhishek-anand-97529128a/',
+    href: profile.socials.linkedin,
     imgDesktop: '/img/contact_linkedin.png',
     imgMobile: '/img/contact_linkedinCrop.png',
     icon: (
@@ -20,7 +21,7 @@ const CARDS = [
     key: 'gmail',
     title: 'Gmail',
     subtitle: 'Reach out to me via email',
-    href: 'mailto:abhishekanandvii@gmail.com',
+    href: `mailto:${profile.email}`,
     imgDesktop: '/img/contact_mail.png',
     imgMobile: '/img/contact_mailCrop.png',
     icon: (
@@ -34,7 +35,7 @@ const CARDS = [
     key: 'instagram',
     title: 'Instagram',
     subtitle: 'Follow me on Instagram',
-    href: 'https://www.instagram.com/abhi_rehnedo',
+    href: profile.socials.instagram,
     imgDesktop: '/img/contact_insta.png',
     imgMobile: '/img/contact_instaCrop.png',
     icon: (
@@ -48,6 +49,7 @@ const CARDS = [
 ]
 
 export default function Contact() {
+  const cards = getCards(profile)
   return (
     <section id="contact" className="py-24 bg-[#f3f4f7] dark:bg-[#10131a] transition-colors duration-300">
       <div className="max-w-[1200px] mx-auto px-6">
@@ -61,7 +63,7 @@ export default function Contact() {
 
         {/* Cards grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          {CARDS.map((card) => (
+          {cards.map((card) => (
             <a
               key={card.key}
               href={card.href}

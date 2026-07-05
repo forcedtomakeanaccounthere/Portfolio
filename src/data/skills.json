@@ -1,0 +1,18 @@
+[
+  {
+    "category": "Languages",
+    "skills": "C/C++, Python, Java, JavaScript, TypeScript, SQL"
+  },
+  {
+    "category": "Full-Stack & Frameworks",
+    "skills": "Next.js, React.js, Node.js, Express, Redux, GraphQL, Tailwind CSS, HTML, MongoDB"
+  },
+  {
+    "category": "AI/ML & Research",
+    "skills": "Machine Learning, Deep Learning, TensorFlow, NumPy, Pandas, Scikit-learn"
+  },
+  {
+    "category": "Cloud & DevOps",
+    "skills": "AWS, Google Cloud, Docker, Git, GitHub, Linux"
+  }
+]
