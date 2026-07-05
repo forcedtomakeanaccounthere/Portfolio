@@ -1,4 +1,18 @@
 {
   "title": "CSE Undergrad",
+<<<<<<< HEAD
   "text": "I'm a 3rd-year B.Tech CSE student at IIIT Sri City, Chittoor, with a deep passion for building impactful web applications that tackle real-world challenges. Specializing in full-stack web development, I work with modern technologies like Next.js, React, Node.js, and Python to create scalable, user-friendly digital solutions.\n\nI also have a strong foundation in AI/ML and Data Science, which allows me to integrate intelligent algorithms into web applications to enhance functionality. As an active AI/ML Domain Lead at GDG IIIT-Sri City, I continually seek opportunities to merge my web development expertise with machine learning to deliver innovative, data-driven solutions.\n\nEx-Full Stack Developer Intern at Wecofy Technotides\nSDE Intern at Cogzin Technologies."
+=======
+  "text": "I'm a 3rd-year B.Tech CSE student at IIIT Sri City, Chittoor, with a deep passion for building impactful web applications that tackle real-world challenges. Specializing in full-stack web development, I work with modern technologies like Next.js, React, Node.js, and Python to create scalable, user-friendly digital solutions.\n\nI also have a strong foundation in AI/ML and Data Science, which allows me to integrate intelligent algorithms into web applications to enhance functionality. As an active AI/ML Domain Lead at GDG IIIT-Sri City, I continually seek opportunities to merge my web development expertise with machine learning to deliver innovative, data-driven solutions.\n\nEx-Full Stack Developer Intern at Wecofy Technotides\nSDE Intern at Cogzin Technologies.",
+  "education": [
+    {
+      "id": 1783279982242,
+      "degree": "Bachelors of Technology - Computer Science",
+      "college": "Indian Institute of Information Technology - Sri City, Chittor",
+      "duration": "Aug 2023 - Aug 2027",
+      "location": "Sri City, Chittoor, Andhra Pradesh",
+      "cgpa": "8.7"
+    }
+  ]
+>>>>>>> beabaff16d67fe0569c17ca0ed5a52ee37e34f36
 }
