@@ -9,10 +9,10 @@
   },
   {
     "category": "AI/ML & Research",
-    "skills": "Machine Learning, Deep Learning, TensorFlow, NumPy, Pandas, Scikit-learn"
+    "skills": "Machine Learning, Deep Learning, TensorFlow, NumPy, Pandas, Scikit-learn, RAG"
   },
   {
     "category": "Cloud & DevOps",
-    "skills": "AWS, Google Cloud, Docker, Git, GitHub, Linux"
+    "skills": "AWS, Google Cloud, Docker, Git, GitHub, Linux, Postman"
   }
 ]
