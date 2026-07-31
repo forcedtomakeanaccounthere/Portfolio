@@ -6,8 +6,9 @@
     "description": "A comprehensive full-stack YouTube management platform enabling streamlined downloads, AI-powered transcriptions, and real-time collaborative playlists.",
     "fullDescription": [
       "Architected and built a full-stack platform with streamlined Audio, Video, and Playlist download capabilities using yt-dlp.",
-      "Implemented an AI-powered transcription and summary generator for rapid content analysis.",
+      "Implemented an transcription and AI-powered summary generator for rapid content analysis with Q& option using RAG pipeline.",
       "Developed a real-time collaborative playlist manager with granular access controls (Editor, Viewer, Owner, Admin).",
+      "Synchronized youtube streaming with Audio/Video streaming, Chat and reactions",
       "Integrated secure authentication via Google OAuth 2.0 and JWT, session management, and Stripe subscription billing.",
       "Built a resilient media-processing system with background queuing, format conversion, and Cloudinary storage integration.",
       "Utilized Nodemailer for collaborative invites and secure password reset workflows."
@@ -22,7 +23,7 @@
       "Stripe",
       "Cloudinary"
     ],
-    "githubLink": "https://github.com/forcedtomakeanaccounthere/Youtube-Mate",
+    "githubLink": "https://github.com/forcedtomakeanaccounthere",
     "liveLink": "https://youtube-mate-mu.vercel.app/",
     "image": "/uploads/1783277631780_ChatGPT_Image_Jul_6__2026__12_23_24_AM.png",
     "gallery": [
@@ -52,7 +53,7 @@
       "Node.js",
       "Framer Motion"
     ],
-    "githubLink": "https://github.com/forcedtomakeanaccounthere/Milestone",
+    "githubLink": "https://github.com/forcedtomakeanaccounthere",
     "liveLink": "https://milestone-freelancing-website.vercel.app/",
     "image": "/uploads/1783278316187_Screenshot_2026-07-06_003501.png",
     "gallery": [
@@ -81,8 +82,8 @@
       "Cloud Security",
       "Twofish Encryption"
     ],
-    "githubLink": "https://github.com/forcedtomakeanaccounthere/SQLi-prevention-in-Cloud-Environment",
-    "liveLink": "https://main.d13hxya0z0ry8r.amplifyapp.com/",
+    "githubLink": "https://github.com/forcedtomakeanaccounthere/Cloud-Computing-project",
+    "liveLink": "https://insure-pred-ai-8j4u.vercel.app/",
     "image": "/uploads/1783279533400_Screenshot_2026-07-06_005518.png",
     "gallery": [
       "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2070&auto=format&fit=crop",
@@ -120,6 +121,32 @@
     ]
   },
   {
+    "id": "churn-prevention",
+    "name": "Churn Prevention System",
+    "tagline": "",
+    "description": "An intelligent analytical engine that identifies at-risk telecom customers and generates personalized retention offers through predictive modeling.",
+    "fullDescription": [
+      "Analyzed large-scale telecom datasets to identify key behavioral indicators of customer churn.",
+      "Developed a predictive model using Machine Learning algorithms to flag high-risk accounts.",
+      "Integrated a content-based filtering system to recommend targeted offers designed to reduce attrition.",
+      "Provides actionable insights for business stakeholders to improve customer lifetime value."
+    ],
+    "techStack": [
+      "Python",
+      "Machine Learning",
+      "Pandas",
+      "Scikit-Learn",
+      "Recommender Systems"
+    ],
+    "githubLink": "https://github.com/forcedtomakeanaccounthere/Churn-prevention-recommender-system",
+    "liveLink": null,
+    "image": "/img/churn2.0.jpg",
+    "gallery": [
+      "https://images.unsplash.com/photo-1551288049-bbda64626d44?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1543286386-713bdd548da4?q=80&w=2070&auto=format&fit=crop"
+    ]
+  },
+  {
     "id": "sarcasm-predictor",
     "name": "Sarcasm Predictor",
     "tagline": "",
@@ -145,32 +172,6 @@
     "gallery": [
       "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1546776310-eef45dd6d63c?q=80&w=2010&auto=format&fit=crop"
-    ]
-  },
-  {
-    "id": "churn-prevention",
-    "name": "Churn Prevention System",
-    "tagline": "",
-    "description": "An intelligent analytical engine that identifies at-risk telecom customers and generates personalized retention offers through predictive modeling.",
-    "fullDescription": [
-      "Analyzed large-scale telecom datasets to identify key behavioral indicators of customer churn.",
-      "Developed a predictive model using Machine Learning algorithms to flag high-risk accounts.",
-      "Integrated a content-based filtering system to recommend targeted offers designed to reduce attrition.",
-      "Provides actionable insights for business stakeholders to improve customer lifetime value."
-    ],
-    "techStack": [
-      "Python",
-      "Machine Learning",
-      "Pandas",
-      "Scikit-Learn",
-      "Recommender Systems"
-    ],
-    "githubLink": "https://github.com/forcedtomakeanaccounthere/Churn-prevention-recommender-system",
-    "liveLink": null,
-    "image": "/img/churn2.0.jpg",
-    "gallery": [
-      "https://images.unsplash.com/photo-1551288049-bbda64626d44?q=80&w=2070&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1543286386-713bdd548da4?q=80&w=2070&auto=format&fit=crop"
     ]
   },
   {
