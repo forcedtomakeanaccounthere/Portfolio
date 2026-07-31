@@ -19,9 +19,9 @@ export default function ProjectCard({ project, onSeeMore, index }) {
       } mb-40 md:mb-60 last:mb-0`}
     >
       {/* Cinematic Image Container - High Asymmetry */}
-      <div className={`relative w-full md:w-[60%] aspect-[16/10] sm:aspect-[4/3] md:aspect-[16/10] rounded-[2.5rem] md:rounded-[4rem] overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.2)] z-0 bg-slate-200 dark:bg-slate-800 transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:shadow-[0_60px_120px_rgba(0,0,0,0.3)] isolate ${
+      <div className={`relative w-full md:w-[60%] aspect-[16/10] sm:aspect-[4/3] md:aspect-[16/10] rounded-[2.5rem] md:rounded-[4rem] overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.2)] bg-slate-200 dark:bg-slate-800 transition-[transform,box-shadow] duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:shadow-[0_60px_120px_rgba(0,0,0,0.3)] ${
         isEven ? 'rotate-[-2deg] group-hover:rotate-0' : 'rotate-[2deg] group-hover:rotate-0'
-      }`} style={{ transform: 'translateZ(0)' }}>
+      }`} style={{ position: 'relative', zIndex: 0, transform: 'translateZ(0)' }}>
         <Image
           src={project.image}
           alt={project.name}
@@ -42,9 +42,10 @@ export default function ProjectCard({ project, onSeeMore, index }) {
 
       {/* High-Concept Content Panel - Deep Overlap */}
       <div
-        className={`w-[92%] md:w-3/5 p-10 md:p-20 backdrop-blur-3xl bg-white/80 dark:bg-slate-900/80 border border-white/50 dark:border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.12)] rounded-[3rem] -mt-24 md:mt-0 relative z-[20] transition-all duration-700 hover:shadow-[0_40px_100px_rgba(0,0,0,0.18)] isolate ${
+        className={`w-[92%] md:w-3/5 p-10 md:p-20 backdrop-blur-3xl bg-white dark:bg-slate-900 border border-white/50 dark:border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.12)] rounded-[3rem] -mt-24 md:mt-0 relative transition-[box-shadow] duration-700 hover:shadow-[0_40px_100px_rgba(0,0,0,0.18)] ${
           isEven ? 'md:-ml-32 lg:-ml-48' : 'md:-mr-32 lg:-mr-48'
         }`}
+        style={{ position: 'relative', zIndex: 20, willChange: 'transform' }}
       >
         <div className="flex flex-col gap-6 mb-10">
           <div className="flex items-center gap-4">

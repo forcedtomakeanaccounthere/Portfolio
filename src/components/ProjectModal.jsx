@@ -20,6 +20,20 @@ export default function ProjectModal({ project, isOpen, onClose }) {
     return () => { document.body.style.overflow = 'unset'; };
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!isOpen || gallery.length <= 1) return;
+
+    const intervalId = window.setInterval(() => {
+      setCurrentImage((current) => {
+        const nextIndex = (current + 1) % gallery.length;
+        scrollToImage(nextIndex);
+        return nextIndex;
+      });
+    }, 2000);
+
+    return () => window.clearInterval(intervalId);
+  }, [isOpen, gallery.length]);
+
   const handleScroll = (e) => {
     const container = e.target;
     const index = Math.round(container.scrollLeft / container.clientWidth);
@@ -70,7 +84,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
               transformOrigin: 'center center',
               willChange: 'transform, opacity'
             }}
-            className="relative w-full max-w-[1200px] h-full sm:h-auto sm:max-h-[95vh] bg-white sm:rounded-[3rem] overflow-hidden shadow-[0_50px_100px_rgba(0,0,0,0.5)] flex flex-col gb-popup-cube"
+            className="relative w-full max-w-[1200px] h-full sm:h-auto sm:max-h-[95vh] bg-white dark:bg-slate-900 sm:rounded-[3rem] overflow-hidden shadow-[0_50px_100px_rgba(0,0,0,0.5)] flex flex-col gb-popup-cube"
           >
             {/* Close Button - Premium Glassmorphic */}
             <button
@@ -83,9 +97,9 @@ export default function ProjectModal({ project, isOpen, onClose }) {
               </svg>
             </button>
 
-            <div className="overflow-y-auto custom-scrollbar h-full scroll-smooth bg-white">
+            <div className="overflow-y-auto custom-scrollbar h-full scroll-smooth bg-white dark:bg-slate-900">
               {/* Cinematic Image Gallery */}
-              <div className="relative h-[40vh] sm:h-[500px] md:h-[650px] w-full bg-slate-100 group/gallery overflow-hidden">
+              <div className="relative h-[40vh] sm:h-[500px] md:h-[550px] w-full bg-slate-100 dark:bg-slate-800 group/gallery overflow-hidden">
                 <div 
                   ref={scrollContainerRef}
                   onScroll={handleScroll}
@@ -140,7 +154,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                 </div>
 
                 {/* Elegant Bottom Gradient */}
-                <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-white to-transparent pointer-events-none" />
+                <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-white dark:from-slate-900 to-transparent pointer-events-none" />
               </div>
 
               {/* High-Fidelity Content Section */}
@@ -155,14 +169,14 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                     <span className="px-5 py-2 bg-[#DC143C]/10 text-[#DC143C] text-[1.2rem] font-black uppercase tracking-[0.4em] rounded-lg">
                       Engineering Case Study
                     </span>
-                    <div className="h-[2px] w-16 bg-slate-200" />
+                    <div className="h-[2px] w-16 bg-slate-200 dark:bg-slate-700" />
                   </motion.div>
                   
                   <motion.h3 
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 }}
-                    className="text-[6rem] md:text-[9rem] font-[900] text-slate-900 leading-[0.9] mb-16 tracking-tightest"
+                    className="text-[6rem] md:text-[9rem] font-[900] text-slate-900 dark:text-slate-100 leading-[0.9] mb-16 tracking-tightest"
                   >
                     {project.name}
                   </motion.h3>
@@ -174,7 +188,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                     className="flex flex-wrap gap-4"
                   >
                     {project.techStack.map((tech) => (
-                      <span key={tech} className="px-6 py-2.5 bg-slate-100 border border-slate-200 rounded-2xl text-[1.3rem] font-bold text-slate-600 hover:border-[#DC143C] hover:text-[#DC143C] transition-all duration-300 cursor-default">
+                      <span key={tech} className="px-6 py-2.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl text-[1.3rem] font-bold text-slate-600 dark:text-slate-300 hover:border-[#DC143C] hover:text-[#DC143C] transition-all duration-300 cursor-default">
                         {tech}
                       </span>
                     ))}
@@ -189,13 +203,13 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                     transition={{ delay: 0.6 }}
                     className="space-y-12 lg:sticky lg:top-12"
                   >
-                    <div className="p-12 bg-slate-50 rounded-[3rem] border border-slate-100 relative overflow-hidden group shadow-sm">
+                    <div className="p-12 bg-slate-50 dark:bg-slate-800/50 rounded-[3rem] border border-slate-100 dark:border-slate-700 relative overflow-hidden group shadow-sm">
                       <div className="absolute -top-10 -right-10 w-48 h-48 bg-[#DC143C]/5 rounded-full blur-[80px] group-hover:bg-[#DC143C]/10 transition-all duration-700" />
-                      <h4 className="text-[2rem] font-black text-slate-900 mb-8 flex items-center gap-5">
+                      <h4 className="text-[2rem] font-black text-slate-900 dark:text-slate-100 mb-8 flex items-center gap-5">
                         <span className="w-2 h-8 bg-[#DC143C] rounded-full" />
                         Strategic Summary
                       </h4>
-                      <p className="text-[2.2rem] text-slate-700 leading-[1.6] font-light italic">
+                      <p className="text-[2.2rem] text-slate-700 dark:text-slate-300 leading-[1.6] font-light italic">
                         "{project.description}"
                       </p>
                     </div>
@@ -206,7 +220,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                           href={project.githubLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="group relative flex items-center justify-center gap-4 py-6 bg-slate-900 text-white text-[1.6rem] font-black rounded-3xl overflow-hidden shadow-2xl transition-all hover:bg-black active:scale-[0.98]"
+                          className="group relative flex items-center justify-center gap-4 py-6 bg-slate-900 dark:bg-slate-800 text-white text-[1.6rem] font-black rounded-3xl overflow-hidden shadow-2xl transition-all hover:bg-black dark:hover:bg-slate-700 active:scale-[0.98]"
                         >
                           <span className="relative z-10">Access Source Code</span>
                           <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" className="relative z-10">
@@ -238,10 +252,10 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                       transition={{ delay: 0.7 }}
                       className="flex items-center gap-8"
                     >
-                      <h4 className="text-[3rem] font-[900] text-slate-900 tracking-tightest">
+                      <h4 className="text-[3rem] font-[900] text-slate-900 dark:text-slate-100 tracking-tightest">
                         Engineering Impact
                       </h4>
-                      <div className="h-[1px] flex-1 bg-slate-100" />
+                      <div className="h-[1px] flex-1 bg-slate-100 dark:bg-slate-800" />
                     </motion.div>
                     
                     <div className="space-y-12">
@@ -251,12 +265,12 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                           initial={{ opacity: 0, x: 30 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: 0.8 + (i * 0.1) }}
-                          className="flex gap-10 group/item p-10 bg-slate-50/50 hover:bg-white border border-transparent hover:border-slate-100 rounded-[2.5rem] transition-all duration-500 hover:shadow-xl"
+                          className="flex gap-10 group/item p-10 bg-slate-50/50 dark:bg-slate-800/30 hover:bg-white dark:hover:bg-slate-800/50 border border-transparent hover:border-slate-100 dark:hover:border-slate-700 rounded-[2.5rem] transition-all duration-500 hover:shadow-xl"
                         >
-                          <span className="shrink-0 text-[4rem] font-black text-slate-200 group-hover/item:text-[#DC143C]/20 transition-all duration-500 tabular-nums leading-none">
+                          <span className="shrink-0 text-[4rem] font-black text-slate-200 dark:text-slate-700 group-hover/item:text-[#DC143C]/20 transition-all duration-500 tabular-nums leading-none">
                             {String(i + 1).padStart(2, '0')}
                           </span>
-                          <p className="text-[2rem] text-slate-600 leading-[1.7] font-light pt-2">
+                          <p className="text-[2rem] text-slate-600 dark:text-slate-300 leading-[1.7] font-light pt-2">
                             {point}
                           </p>
                         </motion.div>

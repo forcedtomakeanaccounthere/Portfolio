@@ -23,13 +23,24 @@
       "Stripe",
       "Cloudinary"
     ],
-    "githubLink": "https://github.com/forcedtomakeanaccounthere",
+    "githubLink": "https://github.com/forcedtomakeanaccounthere/Youtube-Mate",
     "liveLink": "https://youtube-mate-mu.vercel.app/",
     "image": "/uploads/1783277631780_ChatGPT_Image_Jul_6__2026__12_23_24_AM.png",
     "gallery": [
-      "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=1974&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop"
+      "/img/yt-mate/2.png",
+      "/img/yt-mate/3.png",
+      "/img/yt-mate/4.png",
+      "/img/yt-mate/5.png",
+      "/img/yt-mate/6.1.png",
+      "/img/yt-mate/6.2.png",
+      "/img/yt-mate/6.png",
+      "/img/yt-mate/7.1.png",
+      "/img/yt-mate/7.png",
+      "/img/yt-mate/8.1.png",
+      "/img/yt-mate/8.2.png",
+      "/img/yt-mate/8.3.png",
+      "/img/yt-mate/8.png",
+      "/img/yt-mate/9.png"
     ]
   },
   {
@@ -53,13 +64,21 @@
       "Node.js",
       "Framer Motion"
     ],
-    "githubLink": "https://github.com/forcedtomakeanaccounthere",
+    "githubLink": "https://github.com/forcedtomakeanaccounthere/Milestone",
     "liveLink": "https://milestone-freelancing-website.vercel.app/",
     "image": "/uploads/1783278316187_Screenshot_2026-07-06_003501.png",
     "gallery": [
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2070&auto=format&fit=crop"
+      "/img/milestone/m (1).png",
+      "/img/milestone/m (2).png",
+      "/img/milestone/m (3).png",
+      "/img/milestone/m (4).png",
+      "/img/milestone/m (5).png",
+      "/img/milestone/m (6).png",
+      "/img/milestone/m (7).png",
+      "/img/milestone/m (8).png",
+      "/img/milestone/m (9).png",
+      "/img/milestone/m (10).png",
+      "/img/milestone/m (11).png"
     ]
   },
   {
@@ -82,13 +101,18 @@
       "Cloud Security",
       "Twofish Encryption"
     ],
-    "githubLink": "https://github.com/forcedtomakeanaccounthere/Cloud-Computing-project",
+    "githubLink": "https://github.com/forcedtomakeanaccounthere/SQLi-prevention-in-Cloud-Environment",
     "liveLink": "https://insure-pred-ai-8j4u.vercel.app/",
     "image": "/uploads/1783279533400_Screenshot_2026-07-06_005518.png",
     "gallery": [
-      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2070&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2070&auto=format&fit=crop"
+      "/img/sqli attack/s (1).png",
+      "/img/sqli attack/s (2).png",
+      "/img/sqli attack/s (3).png",
+      "/img/sqli attack/s (4).png",
+      "/img/sqli attack/s (5).png",
+      "/img/sqli attack/s (6).png",
+      "/img/sqli attack/s (7).png",
+      "/img/sqli attack/s (8).png"
     ]
   },
   {
@@ -115,9 +139,15 @@
     "liveLink": "https://teamalpha-agriai.streamlit.app/",
     "image": "/uploads/1783279640346_AgriAI.webp",
     "gallery": [
-      "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=2070&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=2070&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=2070&auto=format&fit=crop"
+      "/img/agriai/a (1).png",
+      "/img/agriai/a (3).png",
+      "/img/agriai/a (4).png",
+      "/img/agriai/a (5).png",
+      "/img/agriai/a (6).png",
+      "/img/agriai/a (7).png",
+      "/img/agriai/a (8).png",
+      "/img/agriai/a (9).png",
+      "/img/agriai/a (10).png"
     ]
   },
   {

@@ -251,6 +251,12 @@ export default function AdminPage() {
   const [statusMessage, setStatusMessage] = useState({ type: '', text: '' })
   const [saveLoading, setSaveLoading] = useState(false)
 
+  // Pending changes – tracks which sections have unsaved edits
+  const [pendingChanges, setPendingChanges] = useState(new Set())
+  // Commit message modal
+  const [commitModal, setCommitModal] = useState(false)
+  const [commitMessage, setCommitMessage] = useState('')
+
   // Modals
   const [expModal, setExpModal] = useState({ isOpen: false, item: null, isEdit: false })
   const [projectModal, setProjectModal] = useState({ isOpen: false, item: null, isEdit: false })
@@ -306,9 +312,7 @@ export default function AdminPage() {
         ...prev,
         [type]: arrayMove(prev[type], prev[type].findIndex(item => item.id === active.id), prev[type].findIndex(item => item.id === over.id))
       }))
-      // Auto-save the reordered list
-      const newData = arrayMove(data[type], data[type].findIndex(item => item.id === active.id), data[type].findIndex(item => item.id === over.id))
-      handleSave(type, newData)
+      markDirty(type)
     }
   }
 
@@ -349,18 +353,58 @@ export default function AdminPage() {
     setIsLoggedIn(false)
   }
 
-  const handleSave = async (type, updatedContent) => {
+  // Mark a section as having unsaved changes (does NOT commit to GitHub)
+  const markDirty = (type) => {
+    setPendingChanges(prev => new Set([...prev, type]))
+  }
+
+  // Low-level save: write one section to GitHub (used internally by handleSaveAll)
+  const handleSave = async (type, updatedContent, commitMsg) => {
     setSaveLoading(true)
     try {
       const res = await fetch('/api/save', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ type, data: updatedContent })
+        body: JSON.stringify({ type, data: updatedContent, commitMessage: commitMsg })
       })
       const json = await res.json()
       if (res.ok && json.success) {
         setData(prev => ({ ...prev, [type]: updatedContent }))
-        showStatus('success', json.githubSaved ? 'Saved & committed to GitHub! Site is redeploying...' : 'Saved successfully!')
+        return true
+      } else {
+        showStatus('error', 'Failed to save ' + type + ': ' + (json.error || 'Server error'))
+        return false
+      }
+    } catch (err) {
+      showStatus('error', 'Connection error: ' + err.message)
+      return false
+    } finally {
+      setSaveLoading(false)
+    }
+  }
+
+  // Save all pending sections in one go (called from sidebar button)
+  const handleSaveAll = async (commitMsg) => {
+    if (pendingChanges.size === 0) return
+    setSaveLoading(true)
+    setCommitModal(false)
+    const sections = [...pendingChanges]
+    const msg = commitMsg.trim() || `Update ${sections.join(', ')} via Admin Panel`
+
+    try {
+      const res = await fetch('/api/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({
+          batch: sections.map(type => ({ type, data: data[type] })),
+          commitMessage: msg
+        })
+      })
+      const json = await res.json()
+      if (res.ok && json.success) {
+        setPendingChanges(new Set())
+        setCommitMessage('')
+        showStatus('success', json.githubSaved ? 'All changes committed to GitHub in one commit! Site is redeploying...' : 'All changes saved!')
       } else {
         showStatus('error', 'Failed to save: ' + (json.error || 'Server error'))
       }
@@ -379,10 +423,14 @@ export default function AdminPage() {
       else p[field] = value
       return { ...prev, profile: p }
     })
+    markDirty('profile')
   }
 
   // About
-  const handleAboutChange = (field, value) => setData(prev => ({ ...prev, about: { ...prev.about, [field]: value } }))
+  const handleAboutChange = (field, value) => {
+    setData(prev => ({ ...prev, about: { ...prev.about, [field]: value } }))
+    markDirty('about')
+  }
 
   // Skills
   const handleSkillChange = (index, field, value) => {
@@ -391,11 +439,16 @@ export default function AdminPage() {
       s[index] = { ...s[index], [field]: value }
       return { ...prev, skills: s }
     })
+    markDirty('skills')
   }
-  const addSkillCategory = () => setData(prev => ({ ...prev, skills: [...prev.skills, { category: 'New Category', skills: '' }] }))
+  const addSkillCategory = () => {
+    setData(prev => ({ ...prev, skills: [...prev.skills, { category: 'New Category', skills: '' }] }))
+    markDirty('skills')
+  }
   const deleteSkillCategory = (i) => {
     if (!confirm('Delete this category?')) return
     setData(prev => ({ ...prev, skills: prev.skills.filter((_, idx) => idx !== i) }))
+    markDirty('skills')
   }
 
   // Experiences
@@ -411,29 +464,29 @@ export default function AdminPage() {
   const handleExpSave = (e) => {
     e.preventDefault()
     const item = expModal.item
-    // Fallback priority: mobile version is always the fallback
     const imageMobile = item.imageMobile || item.imageDesktop || item.image || ''
     const imageDesktop = item.imageDesktop || item.image || ''
-    
     const parsed = {
       ...item,
       tech: item.tech.split(',').map(s => s.trim()).filter(Boolean),
       detailed: item.detailed.split('\n').map(s => s.trim()).filter(Boolean),
       url: item.url || null,
-      // Always ensure mobile version is set as fallback
       imageMobile: imageMobile,
       imageDesktop: imageDesktop,
-      // Keep legacy image field for backwards compatibility (fallback to mobile)
       image: imageMobile
     }
     const list = expModal.isEdit
       ? data.experiences.map(x => x.id === parsed.id ? parsed : x)
       : [...data.experiences, parsed]
-    handleSave('experiences', list)
+    setData(prev => ({ ...prev, experiences: list }))
+    markDirty('experiences')
     closeExpModal()
   }
   const deleteExp = (id) => {
-    if (confirm('Delete this experience?')) handleSave('experiences', data.experiences.filter(x => x.id !== id))
+    if (confirm('Delete this experience?')) {
+      setData(prev => ({ ...prev, experiences: prev.experiences.filter(x => x.id !== id) }))
+      markDirty('experiences')
+    }
   }
 
   // Projects
@@ -461,11 +514,15 @@ export default function AdminPage() {
     const list = projectModal.isEdit
       ? data.projects.map(x => x.id === item.id ? parsed : x)
       : [...data.projects, parsed]
-    handleSave('projects', list)
+    setData(prev => ({ ...prev, projects: list }))
+    markDirty('projects')
     closeProjectModal()
   }
   const deleteProject = (id) => {
-    if (confirm('Delete this project?')) handleSave('projects', data.projects.filter(x => x.id !== id))
+    if (confirm('Delete this project?')) {
+      setData(prev => ({ ...prev, projects: prev.projects.filter(x => x.id !== id) }))
+      markDirty('projects')
+    }
   }
 
   // Education
@@ -484,11 +541,15 @@ export default function AdminPage() {
     const list = eduModal.isEdit
       ? data.education.map(x => x.id === item.id ? item : x)
       : [...data.education, item]
-    handleSave('education', list)
+    setData(prev => ({ ...prev, education: list }))
+    markDirty('education')
     closeEduModal()
   }
   const deleteEdu = (id) => {
-    if (confirm('Delete this education entry?')) handleSave('education', data.education.filter(x => x.id !== id))
+    if (confirm('Delete this education entry?')) {
+      setData(prev => ({ ...prev, education: prev.education.filter(x => x.id !== id) }))
+      markDirty('education')
+    }
   }
 
   // ── Shared input className generator ──────────────────────────────────────
@@ -654,7 +715,7 @@ export default function AdminPage() {
         )}
 
         {/* Sidebar */}
-        <aside className="admin-sidebar w-[260px] border-r flex flex-col shrink-0 min-h-screen">
+        <aside className="admin-sidebar w-[260px] border-r flex flex-col shrink-0 sticky top-0 h-screen overflow-y-auto">
           <div className="px-6 py-7 admin-border border-b flex items-center justify-between">
             <div>
               <h1 className="text-[2rem] font-black tracking-tight leading-none">
@@ -688,14 +749,49 @@ export default function AdminPage() {
                 }`}
               >
                 {tab === 'experiences' ? 'Experience' : tab === 'education' ? 'Education' : tab}
+                {pendingChanges.has(tab) && (
+                  <span className="ml-auto w-2 h-2 rounded-full bg-amber-400 shrink-0" />
+                )}
               </button>
             ))}
           </nav>
+
+          {/* Save Changes button */}
+          <div className="px-4 pb-6">
+            <button
+              onClick={() => { if (pendingChanges.size > 0) setCommitModal(true) }}
+              disabled={pendingChanges.size === 0 || saveLoading}
+              className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-[1.3rem] font-bold transition-all duration-300 ${
+                pendingChanges.size > 0
+                  ? 'bg-[#DC143C] hover:bg-[#b00f30] text-white shadow-[0_4px_14px_rgba(220,20,60,0.3)]'
+                  : 'opacity-40 cursor-not-allowed admin-btn-secondary'
+              }`}
+            >
+              {saveLoading ? (
+                <>
+                  <span className="w-4 h-4 rounded-full border-2 border-t-transparent border-white animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                <>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" /><polyline points="17 21 17 13 7 13 7 21" /><polyline points="7 3 7 8 15 8" />
+                  </svg>
+                  Save Changes
+                  {pendingChanges.size > 0 && (
+                    <span className="ml-1 px-2 py-0.5 rounded-full bg-white/20 text-[1rem] font-bold">
+                      {pendingChanges.size}
+                    </span>
+                  )}
+                </>
+              )}
+            </button>
+          </div>
         </aside>
 
         {/* Main */}
         <section className="flex-1 overflow-y-auto px-10 py-12">
-          <div className="max-w-[800px]">
+          <div className="max-w-[800px] mx-auto w-full">
             <div className="flex items-center justify-between mb-10">
               <h2 className="text-[3.2rem] font-bold tracking-tight capitalize">
                 {activeTab === 'experiences' ? 'Experience' : activeTab === 'projects' ? 'Projects' : activeTab === 'education' ? 'Education' : activeTab}
@@ -710,8 +806,7 @@ export default function AdminPage() {
 
             {/* ── TAB: Profile ── */}
             {activeTab === 'profile' && data.profile && (
-              <form onSubmit={e => { e.preventDefault(); handleSave('profile', data.profile) }}
-                className="space-y-8 admin-card border rounded-3xl p-8">
+              <div className="space-y-8 admin-card border rounded-3xl p-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {[
                     { label: 'Display Name', field: 'name', type: 'text', required: true },
@@ -769,17 +864,12 @@ export default function AdminPage() {
                   </div>
                 </div>
 
-                <button type="submit" disabled={saveLoading}
-                  className="bg-[#DC143C] hover:bg-[#b00f30] text-white font-bold px-6 py-3 rounded-xl text-[1.4rem] transition-colors">
-                  Save Profile
-                </button>
-              </form>
+              </div>
             )}
 
             {/* ── TAB: About ── */}
             {activeTab === 'about' && data.about && (
-              <form onSubmit={e => { e.preventDefault(); handleSave('about', data.about) }}
-                className="space-y-6 admin-card border rounded-3xl p-8">
+              <div className="space-y-6 admin-card border rounded-3xl p-8">
                 <div>
                   <label className="block text-[1.2rem] font-bold admin-label mb-2">Subheading</label>
                   <input type="text" required value={data.about.title}
@@ -793,11 +883,7 @@ export default function AdminPage() {
                     onChange={e => handleAboutChange('text', e.target.value)}
                     className={`${inp} h-80 resize-y`} />
                 </div>
-                <button type="submit" disabled={saveLoading}
-                  className="bg-[#DC143C] hover:bg-[#b00f30] text-white font-bold px-6 py-3 rounded-xl text-[1.4rem] transition-colors">
-                  Save About
-                </button>
-              </form>
+              </div>
             )}
 
             {/* ── TAB: Skills ── */}
@@ -832,10 +918,6 @@ export default function AdminPage() {
                   <button type="button" onClick={addSkillCategory}
                     className="admin-btn-ghost px-5 py-3 rounded-xl text-[1.3rem] font-bold transition-colors">
                     + Add Domain
-                  </button>
-                  <button type="button" onClick={() => handleSave('skills', data.skills)} disabled={saveLoading}
-                    className="bg-[#DC143C] hover:bg-[#b00f30] text-white font-bold px-6 py-3 rounded-xl text-[1.3rem] transition-colors">
-                    Save Skills
                   </button>
                 </div>
               </div>
@@ -1141,6 +1223,56 @@ export default function AdminPage() {
               <ModalFooter onCancel={closeEduModal} label={eduModal.isEdit ? 'Save Changes' : 'Add Education'} />
             </form>
           </ModalWrapper>
+        )}
+
+        {/* ── Commit Message Modal ── */}
+        {commitModal && (
+          <div className="fixed inset-0 z-[2000] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+            <div className="admin-modal border rounded-3xl w-full max-w-[480px] p-8 shadow-2xl">
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-[2rem] font-bold">Save Changes</h3>
+                <button onClick={() => setCommitModal(false)} className="admin-label hover:text-[#DC143C] transition-colors text-[2.2rem] leading-none">&times;</button>
+              </div>
+              <p className="text-[1.3rem] admin-label mb-2">
+                Saving <span className="font-bold text-[var(--text-color)]">{pendingChanges.size}</span> section{pendingChanges.size !== 1 ? 's' : ''}:{' '}
+                <span className="font-semibold text-[#DC143C]">{[...pendingChanges].join(', ')}</span>
+              </p>
+              <div className="mt-5">
+                <label className="block text-[1.2rem] font-bold admin-label mb-2">
+                  Commit Message <span className="admin-muted font-normal">(optional)</span>
+                </label>
+                <input
+                  type="text"
+                  value={commitMessage}
+                  onChange={e => setCommitMessage(e.target.value)}
+                  placeholder={`Update ${[...pendingChanges].join(', ')} via Admin Panel`}
+                  className="w-full admin-input text-[1.3rem]"
+                  onKeyDown={e => e.key === 'Enter' && handleSaveAll(commitMessage)}
+                  autoFocus
+                />
+                <p className="text-[1.1rem] admin-muted mt-2">Leave blank for default message.</p>
+              </div>
+              <div className="flex justify-end gap-3 mt-6">
+                <button
+                  type="button"
+                  onClick={() => setCommitModal(false)}
+                  className="admin-btn-ghost px-5 py-2.5 rounded-xl text-[1.3rem] font-medium transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleSaveAll(commitMessage)}
+                  className="bg-[#DC143C] hover:bg-[#b00f30] text-white font-bold px-6 py-2.5 rounded-xl text-[1.3rem] transition-colors flex items-center gap-2"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" /><polyline points="17 21 17 13 7 13 7 21" /><polyline points="7 3 7 8 15 8" />
+                  </svg>
+                  Commit & Save
+                </button>
+              </div>
+            </div>
+          </div>
         )}
       </main>
     </>

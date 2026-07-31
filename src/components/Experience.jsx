@@ -12,14 +12,16 @@ function ExperienceImage({ srcDesktop, srcMobile, alt }) {
   const [loaded, setLoaded] = useState(false)
 
   return (
-    <div className="w-full md:w-1/2 group relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl bg-slate-200 dark:bg-slate-800">
+    <div className="w-full md:w-1/2 group relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl bg-slate-200 dark:bg-slate-800"
+      style={{ position: 'relative', zIndex: 0 }}
+    >
       <div className="block md:hidden">
         <Image
           src={srcMobile ?? srcDesktop}
           alt={alt}
           fill
           onLoad={() => setLoaded(true)}
-          className={`object-cover scale-105 group-hover:scale-110 transition-[transform,opacity] duration-700 ease-out ${
+          className={`object-cover group-hover:scale-105 transition-[transform,opacity] duration-700 ease-out ${
             loaded ? 'opacity-100' : 'opacity-0'
           }`}
         />
@@ -31,7 +33,7 @@ function ExperienceImage({ srcDesktop, srcMobile, alt }) {
           alt={alt}
           fill
           onLoad={() => setLoaded(true)}
-          className={`object-cover scale-105 group-hover:scale-110 transition-[transform,opacity] duration-700 ease-out ${
+          className={`object-cover group-hover:scale-105 transition-[transform,opacity] duration-700 ease-out ${
             loaded ? 'opacity-100' : 'opacity-0'
           }`}
         />
@@ -87,9 +89,10 @@ export default function Experience() {
 
               {/* Content Column - Glassmorphic */}
               <div
-                className={`w-[92%] md:w-3/5 p-8 md:p-14 backdrop-blur-2xl bg-white/80 dark:bg-slate-900/80 border border-white/40 dark:border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.1)] rounded-2xl -mt-16 md:mt-0 relative z-10 transition-all duration-500 hover:shadow-[0_30px_60px_rgba(0,0,0,0.15)] ${
+                className={`w-[92%] md:w-3/5 p-8 md:p-14 backdrop-blur-2xl bg-white dark:bg-slate-900 border border-white/40 dark:border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.1)] rounded-2xl -mt-16 md:mt-0 relative transition-[box-shadow] duration-500 hover:shadow-[0_30px_60px_rgba(0,0,0,0.15)] ${
                   index % 2 === 0 ? 'md:-ml-24' : 'md:-mr-24'
                 }`}
+                style={{ position: 'relative', zIndex: 10, willChange: 'transform' }}
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                   <div>
