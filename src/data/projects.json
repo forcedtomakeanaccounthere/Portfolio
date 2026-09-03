@@ -151,6 +151,47 @@
     ]
   },
   {
+    "id": "crop-recommender",
+    "name": "High-Performance Image Processing Platform",
+    "tagline": "Accelerated image processing using parallel CPU and GPU computing.",
+    "description": "A high-performance image processing platform that combines a full-stack web application with native C, OpenMP, and CUDA acceleration to process images efficiently and compare CPU and GPU performance.",
+    "fullDescription": [
+      "Provides an interactive web interface for uploading images, applying filters, adjusting parameters, and downloading processed results.",
+      "Supports grayscale conversion, Gaussian blur, sharpening, noise generation, Sobel edge detection, compression, brightness, saturation, flipping, and image rotation.",
+      "Uses native C and OpenMP to parallelize computationally intensive pixel-level image operations across CPU threads.",
+      "Implements CUDA kernels for GPU-accelerated image processing using massively parallel execution.",
+      "Combines OpenMP task parallelism with CUDA data parallelism for heterogeneous CPU/GPU processing.",
+      "Includes CPU fallback support, allowing the processing pipeline to run without GPU acceleration.",
+      "Provides before-and-after image comparison, processing history, batch filter pipelines, and processing-time metrics.",
+      "Includes benchmarking tools for comparing OpenMP CPU execution with hybrid CUDA GPU execution and measuring image throughput.",
+      "Uses a REST-based architecture to connect the React frontend, Express backend, and native high-performance processing layer."
+    ],
+    "techStack": [
+      "React 18",
+      "JavaScript",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Mongoose",
+      "Multer",
+      "C",
+      "OpenMP",
+      "CUDA",
+      "cuRAND",
+      "STB Image",
+      "STB Image Write",
+      "GCC",
+      "NVCC"
+    ],
+    "githubLink": "https://github.com/forcedtomakeanaccounthere/High-performance-image-processing",
+    "liveLink": null,
+    "image": "/img/img-1.png",
+    "gallery": [
+      "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2032&auto=format&fit=crop"
+    ]
+  },
+  {
     "id": "churn-prevention",
     "name": "Churn Prevention System",
     "tagline": "",
@@ -202,32 +243,6 @@
     "gallery": [
       "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1546776310-eef45dd6d63c?q=80&w=2010&auto=format&fit=crop"
-    ]
-  },
-  {
-    "id": "crop-recommender",
-    "name": "Crop Recommender System",
-    "tagline": "",
-    "description": "An agricultural optimization tool that uses environmental data to recommend ideal crops, maximizing yield and farmer sustainability.",
-    "fullDescription": [
-      "Analyzes regional weather and soil conditions including temperature, rainfall, humidity, and pH levels.",
-      "Applies Machine Learning to match environmental profiles with optimal crop varieties.",
-      "Designed to assist farmers in making data-backed decisions for sustainable land use.",
-      "Significantly improves potential crop yield by reducing the trial-and-error nature of farming."
-    ],
-    "techStack": [
-      "Python",
-      "Machine Learning",
-      "Scikit-Learn",
-      "Pandas",
-      "Data Science"
-    ],
-    "githubLink": "https://github.com/forcedtomakeanaccounthere/crop_recommendation",
-    "liveLink": null,
-    "image": "/img/img-1.png",
-    "gallery": [
-      "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?q=80&w=2070&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2032&auto=format&fit=crop"
     ]
   }
 ]

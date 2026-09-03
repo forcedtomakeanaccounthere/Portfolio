@@ -27,32 +27,6 @@
     "url": "https://muktifresh.in/"
   },
   {
-    "id": 3,
-    "company": "Google Developer Group (GDG)",
-    "role": "Domain Lead, AI/ML & Data Science",
-    "duration": "2025 – 2026",
-    "type": "community",
-    "tech": [
-      "Python",
-      "TensorFlow",
-      "PyTorch",
-      "Scikit-Learn",
-      "OpenCV",
-      "NLP"
-    ],
-    "summary": "Led the AI/ML & Data Science domain at GDG, spearheading high-impact workshops, mentoring developers, and delivering production-grade ML solutions with 95%+ accuracy.",
-    "detailed": [
-      "Designed and implemented end-to-end ML models to solve real-world problems with accuracy of 95% and above.",
-      "Collaborated with 10+ core team members to plan, design, and deliver workshops on AI technologies and frameworks.",
-      "Mentored junior developers and introduced structured learning pathways for aspiring AI/ML practitioners.",
-      "Represented GDG at inter-college tech events, driving community growth and technical excellence."
-    ],
-    "image": "/uploads/1783259768381_WhatsApp_Image_2026-06-15_at_7.10.13_PM.jpeg",
-    "imageDesktop": "/uploads/1783265772999_ChatGPT_Image_Jul_5__2026__09_04_53_PM.png",
-    "imageMobile": "/uploads/1783259768381_WhatsApp_Image_2026-06-15_at_7.10.13_PM.jpeg",
-    "url": null
-  },
-  {
     "id": 2,
     "company": "Wecofy Technotides",
     "role": "Full Stack Developer Intern",
@@ -77,6 +51,32 @@
     "imageDesktop": "/uploads/1783281746528_Screenshot_2026-07-06_011643.png",
     "imageMobile": "/uploads/1783281791106_Screenshot_2026-07-06_011523.png",
     "url": "https://www.bhawbhaw.com/"
+  },
+  {
+    "id": 3,
+    "company": "Google Developer Group (GDG)",
+    "role": "Domain Lead, AI/ML & Data Science",
+    "duration": "2025 – 2026",
+    "type": "community",
+    "tech": [
+      "Python",
+      "TensorFlow",
+      "PyTorch",
+      "Scikit-Learn",
+      "OpenCV",
+      "NLP"
+    ],
+    "summary": "Led the AI/ML & Data Science domain at GDG, spearheading high-impact workshops, mentoring developers, and delivering production-grade ML solutions with 95%+ accuracy.",
+    "detailed": [
+      "Designed and implemented end-to-end ML models to solve real-world problems with accuracy of 95% and above.",
+      "Collaborated with 10+ core team members to plan, design, and deliver workshops on AI technologies and frameworks.",
+      "Mentored junior developers and introduced structured learning pathways for aspiring AI/ML practitioners.",
+      "Represented GDG at inter-college tech events, driving community growth and technical excellence."
+    ],
+    "image": "/uploads/1783259768381_WhatsApp_Image_2026-06-15_at_7.10.13_PM.jpeg",
+    "imageDesktop": "/uploads/1783265772999_ChatGPT_Image_Jul_5__2026__09_04_53_PM.png",
+    "imageMobile": "/uploads/1783259768381_WhatsApp_Image_2026-06-15_at_7.10.13_PM.jpeg",
+    "url": null
   },
   {
     "id": 4,
